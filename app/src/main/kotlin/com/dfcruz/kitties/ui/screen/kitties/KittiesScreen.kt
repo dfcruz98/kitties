@@ -11,32 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dfcruz.kitties.ui.component.ImageItem
+import com.dfcruz.kitties.ui.component.KittiesGrid
 
 @Composable
 fun KittiesScreen(
     viewModel: KittiesViewModel = hiltViewModel()
 ) {
     val kitties = viewModel.kitties.collectAsState().value
-
-    LazyVerticalGrid(
-        modifier = Modifier.fillMaxSize(),
-        columns = GridCells.Fixed(3),
-        verticalArrangement = Arrangement.spacedBy(5.dp),
-        horizontalArrangement = Arrangement.spacedBy(5.dp),
-    ) {
-        items(kitties, key = { it.id }) {
-            ImageItem(
-                image = it.image,
-                isFavourite = it.favourite,
-                name = it.name,
-                onClick = {
-
-                },
-                onFavourite = {
-
-                }
-            )
-        }
-    }
+    KittiesGrid(kitties, onClick = {}, onFavourite = {})
 }
 
