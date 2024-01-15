@@ -3,11 +3,7 @@ package com.dfcruz.kitties
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
-import com.dfcruz.kitties.ui.screen.ListScreen
+import com.dfcruz.kitties.ui.KittiesApp
 import com.dfcruz.kitties.ui.theme.KittiesTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,13 +13,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             KittiesTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    ListScreen()
-                }
+                KittiesApp()
             }
         }
     }

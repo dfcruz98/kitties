@@ -29,7 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 
 @Composable
-fun ListScreen(
+fun KittiesScreen(
     viewModel: KittiesViewModel = hiltViewModel()
 ) {
     val kitties = viewModel.kitties.collectAsState().value
