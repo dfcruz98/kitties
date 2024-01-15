@@ -6,9 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -20,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.dfcruz.kitties.ui.theme.KittiesIcons
 
 @Composable
 fun ImageItem(
@@ -71,7 +69,7 @@ private fun FavouriteIcon(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    val icon = if (isFavourite) Icons.Filled.Star else Icons.Outlined.Star
+    val icon = if (isFavourite) KittiesIcons.Favourite else KittiesIcons.NotFavourite
     Icon(
         imageVector = icon,
         contentDescription = null,
