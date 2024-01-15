@@ -13,6 +13,10 @@ enum class TopLevelDestination(
         icon = Icons.Filled.Star,
         iconTextId = R.string.kitties,
     ),
+    FAVOURITES(
+        icon = Icons.Filled.Star,
+        iconTextId = R.string.favourites,
+    ),
 }
 
 

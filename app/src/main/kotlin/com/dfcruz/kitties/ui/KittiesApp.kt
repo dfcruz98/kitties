@@ -23,6 +23,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.dfcruz.kitties.navigation.TopLevelDestination
+import com.dfcruz.kitties.ui.screen.favourites.favouritesScreen
+import com.dfcruz.kitties.ui.screen.favourites.navigateToFavourites
 import com.dfcruz.kitties.ui.screen.kitties.kittiesNavigationRoute
 import com.dfcruz.kitties.ui.screen.kitties.kittiesScreen
 import com.dfcruz.kitties.ui.screen.kitties.navigateToKitties
@@ -30,7 +32,7 @@ import com.dfcruz.kitties.ui.screen.kitties.navigateToKitties
 @Composable
 fun KittiesApp() {
     val navController = rememberNavController()
-    val screens = remember { listOf(TopLevelDestination.KITTIES) }
+    val screens = remember { listOf(TopLevelDestination.KITTIES, TopLevelDestination.FAVOURITES) }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -47,6 +49,7 @@ fun KittiesApp() {
                 modifier = Modifier.padding(innerPadding)
             ) {
                 kittiesScreen()
+                favouritesScreen()
             }
         }
     }
@@ -87,6 +90,10 @@ fun KittiesBottomNavBar(
 
                     when (destination) {
                         TopLevelDestination.KITTIES -> navController.navigateToKitties(
+                            topLevelNavOptions
+                        )
+
+                        TopLevelDestination.FAVOURITES -> navController.navigateToFavourites(
                             topLevelNavOptions
                         )
                     }
