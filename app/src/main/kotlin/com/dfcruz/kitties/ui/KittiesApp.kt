@@ -23,9 +23,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.dfcruz.kitties.navigation.TopLevelDestination
-import com.dfcruz.kitties.ui.screen.kittiesNavigationRoute
-import com.dfcruz.kitties.ui.screen.kittiesScreen
-import com.dfcruz.kitties.ui.screen.navigateToKitties
+import com.dfcruz.kitties.ui.screen.kitties.kittiesNavigationRoute
+import com.dfcruz.kitties.ui.screen.kitties.kittiesScreen
+import com.dfcruz.kitties.ui.screen.kitties.navigateToKitties
 
 @Composable
 fun KittiesApp() {

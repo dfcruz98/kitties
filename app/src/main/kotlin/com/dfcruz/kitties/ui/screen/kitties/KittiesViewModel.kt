@@ -1,4 +1,4 @@
-package com.dfcruz.kitties.ui.screen
+package com.dfcruz.kitties.ui.screen.kitties
 
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
