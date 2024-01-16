@@ -51,4 +51,7 @@ dependencies {
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+
+    // TODO: Remove this dependency
+    implementation(libs.retrofit)
 }
