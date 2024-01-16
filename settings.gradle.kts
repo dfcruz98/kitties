@@ -15,4 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Kitties"
 include(":app")
+include(":core:network")
 include(":core:database")
