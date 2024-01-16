@@ -41,6 +41,9 @@ android {
 
 dependencies {
 
+    implementation(project(":core:network"))
+    implementation(project(":core:database"))
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
