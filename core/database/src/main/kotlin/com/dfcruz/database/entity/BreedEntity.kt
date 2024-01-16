@@ -15,8 +15,8 @@ data class BreedEntity(
     val countryCode: String,
     val lifeSpan: String,
     val wikipediaUrl: String,
-    @Embedded
+    @Embedded(prefix = "image_")
     val imageEntity: ImageEntity,
-    @Embedded
+    @Embedded(prefix = "weight_")
     val weight: MassUnitEntity
 )
