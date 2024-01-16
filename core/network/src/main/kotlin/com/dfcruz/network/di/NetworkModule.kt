@@ -1,5 +1,6 @@
 package com.dfcruz.network.di
 
+import com.dfcruz.network.BuildConfig
 import com.dfcruz.network.service.CatsService
 import dagger.Module
 import dagger.Provides
