@@ -11,6 +11,6 @@ import com.dfcruz.database.entity.BreedEntity
     exportSchema = true,
 )
 abstract class KittiesDatabase : RoomDatabase() {
-    abstract fun imagesDao(): BreedsDao
+    abstract fun breedsDao(): BreedsDao
 
 }
