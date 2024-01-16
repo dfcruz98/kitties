@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -38,12 +39,19 @@ class NetworkModule {
             level = HttpLoggingInterceptor.Level.BASIC
         }
 
+        val apiKeyInterceptor = Interceptor { chain ->
+            val requestBuilder = chain.request().newBuilder()
+            requestBuilder.addHeader("X-Api-Key", BuildConfig.API_KEY)
+            chain.proceed(requestBuilder.build())
+        }
+
         val builder = OkHttpClient
             .Builder()
             .connectTimeout(HTTP_REQUEST_READ_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(HTTP_REQUEST_WRITE_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(HTTP_REQUEST_CONNECTION_TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(logging)
+            .addInterceptor(apiKeyInterceptor)
 
         return builder.build()
     }
