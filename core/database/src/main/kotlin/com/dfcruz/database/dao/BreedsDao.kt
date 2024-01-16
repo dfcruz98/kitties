@@ -19,6 +19,9 @@ interface BreedsDao {
     @Query("SELECT * FROM breed")
     fun pagingSource(): PagingSource<Int, BreedEntity>
 
+    @Query("SELECT * FROM breed WHERE favourite = 1")
+    fun getFavourites(): Flow<List<BreedEntity>>
+
     @Query("SELECT * FROM breed")
     fun getAll(): Flow<List<BreedEntity>>
 

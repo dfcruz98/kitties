@@ -17,7 +17,7 @@ import com.dfcruz.model.MassUnit
 fun KittiesGrid(
     breeds: List<Breed>,
     onClick: () -> Unit,
-    onFavourite: () -> Unit,
+    onFavourite: (String) -> Unit,
 ) {
     LazyVerticalGrid(
         modifier = Modifier.fillMaxSize(),
@@ -31,7 +31,9 @@ fun KittiesGrid(
                 isFavourite = it.favourite,
                 name = it.name,
                 onClick = onClick,
-                onFavourite = onFavourite
+                onFavourite = {
+                    onFavourite(it.id)
+                }
             )
         }
     }

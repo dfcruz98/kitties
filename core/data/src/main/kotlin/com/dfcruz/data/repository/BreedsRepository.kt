@@ -6,5 +6,12 @@ import kotlinx.coroutines.flow.Flow
 
 interface BreedsRepository {
 
-    fun getBreeds(): Flow<PagingData<Breed>>
+    fun getBreedsPaging(): Flow<PagingData<Breed>>
+
+    fun getBreeds(): Flow<List<Breed>>
+
+    fun getFavouriteBreeds(): Flow<List<Breed>>
+
+    suspend fun toggleBreedFavourite(id: String)
+
 }

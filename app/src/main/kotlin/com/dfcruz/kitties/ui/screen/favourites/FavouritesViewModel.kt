@@ -1,41 +1,29 @@
 package com.dfcruz.kitties.ui.screen.favourites
 
 import androidx.lifecycle.ViewModel
-import com.dfcruz.model.Breed
-import com.dfcruz.model.Image
-import com.dfcruz.model.MassUnit
+import androidx.lifecycle.viewModelScope
+import com.dfcruz.data.repository.BreedsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavouritesViewModel @Inject constructor() : ViewModel() {
+class FavouritesViewModel @Inject constructor(
+    private val breedsRepository: BreedsRepository,
+) : ViewModel() {
 
-    private val kittens = List(1) { index ->
-        Breed(
-            id = "$index",
-            name = "Bengal",
-            temperament = "",
-            origin = "",
-            countryCodes = "",
-            countryCode = "",
-            lifeSpan = "",
-            wikipediaUrl = "",
-            image = Image(
-                id = "",
-                width = 1,
-                height = 1,
-                url = "https://cdn2.thecatapi.com/images/werXZVLvS.jpg"
-            ),
-            weight = MassUnit(
-                imperial = "",
-                metric = ""
-            )
+    val breeds = breedsRepository.getFavouriteBreeds()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = listOf(),
         )
+
+    fun toggleFavourite(id: String) {
+        viewModelScope.launch {
+            breedsRepository.toggleBreedFavourite(id)
+        }
     }
-
-    private val _breeds = MutableStateFlow(kittens)
-    val breeds = _breeds.asStateFlow()
-
 }

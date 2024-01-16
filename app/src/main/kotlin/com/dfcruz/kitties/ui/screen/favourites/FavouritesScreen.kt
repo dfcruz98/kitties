@@ -8,5 +8,11 @@ import com.dfcruz.kitties.ui.component.KittiesGrid
 @Composable
 fun FavouritesScreen(viewModel: FavouritesViewModel = hiltViewModel()) {
     val breeds = viewModel.breeds.collectAsState().value
-    KittiesGrid(breeds, onClick = {}, onFavourite = {})
+    KittiesGrid(
+        breeds = breeds,
+        onClick = {},
+        onFavourite = {
+            viewModel.toggleFavourite(it)
+        }
+    )
 }
