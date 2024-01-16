@@ -14,6 +14,7 @@ fun BreedEntity.toBreed(): Breed = Breed(
     countryCode = this.countryCode,
     lifeSpan = this.lifeSpan,
     wikipediaUrl = this.wikipediaUrl,
+    favourite = this.favourite,
     image = Image(
         id = this.imageEntity.id,
         width = this.imageEntity.width,

@@ -11,7 +11,7 @@ data class Breed(
     val countryCodes: String,
     val countryCode: String,
     val lifeSpan: String,
-    val isFavourite: Boolean = false,
+    val favourite: Boolean = false,
     val wikipediaUrl: String,
     val image: Image,
     val weight: MassUnit

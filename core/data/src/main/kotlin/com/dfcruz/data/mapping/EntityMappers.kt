@@ -19,6 +19,7 @@ fun BreedDto.toBreedEntity(catImageDto: CatImageDto): BreedEntity = BreedEntity(
     countryCode = this.countryCode,
     lifeSpan = this.lifeSpan,
     wikipediaUrl = this.wikipediaUrl,
+    favourite = false,
     imageEntity = ImageEntity(
         id = catImageDto.id,
         width = catImageDto.width,

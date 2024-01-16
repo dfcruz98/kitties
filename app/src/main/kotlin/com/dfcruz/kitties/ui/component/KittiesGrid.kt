@@ -28,7 +28,7 @@ fun KittiesGrid(
         items(breeds, key = { it.id }) {
             ImageItem(
                 image = it.image.url,
-                isFavourite = it.isFavourite,
+                isFavourite = it.favourite,
                 name = it.name,
                 onClick = onClick,
                 onFavourite = onFavourite
