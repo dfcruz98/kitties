@@ -8,7 +8,7 @@ data class CatImageDto(
     @SerializedName("width")
     val width: Int,
     @SerializedName("height")
-    val height: String,
+    val height: Int,
     @SerializedName("url")
     val url: String,
     @SerializedName("breeds")

@@ -1,7 +1,9 @@
 package com.dfcruz.kitties.ui.screen.kitties
 
-import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
+import com.dfcruz.model.Breed
+import com.dfcruz.model.Image
+import com.dfcruz.model.MassUnit
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -10,24 +12,29 @@ import javax.inject.Inject
 @HiltViewModel
 class KittiesViewModel @Inject constructor() : ViewModel() {
 
-    private val kittens = List(20) { index ->
-        Kitty(
+    private val breedss = List(20) { index ->
+        Breed(
             id = "$index",
             name = "Bengal",
-            "https://cdn2.thecatapi.com/images/werXZVLvS.jpg",
-            false,
+            temperament = "",
+            origin = "",
+            countryCodes = "",
+            countryCode = "",
+            lifeSpan = "",
+            wikipediaUrl = "",
+            image = Image(
+                id = "",
+                width = 1,
+                height = 1,
+                url = "https://cdn2.thecatapi.com/images/werXZVLvS.jpg"
+            ),
+            weight = MassUnit(
+                imperial = "",
+                metric = ""
+            )
         )
     }
 
-    private val _kitties = MutableStateFlow(kittens)
-    val kitties = _kitties.asStateFlow()
+    private val _breeds = MutableStateFlow(breedss)
+    val breeds = _breeds.asStateFlow()
 }
-
-
-@Immutable
-data class Kitty(
-    val id: String,
-    val name: String,
-    val image: String,
-    val favourite: Boolean
-)

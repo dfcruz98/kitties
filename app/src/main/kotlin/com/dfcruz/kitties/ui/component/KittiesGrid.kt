@@ -9,11 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dfcruz.kitties.ui.screen.kitties.Kitty
+import com.dfcruz.model.Breed
+import com.dfcruz.model.Image
+import com.dfcruz.model.MassUnit
 
 @Composable
 fun KittiesGrid(
-    kitties: List<Kitty>,
+    breeds: List<Breed>,
     onClick: () -> Unit,
     onFavourite: () -> Unit,
 ) {
@@ -23,10 +25,10 @@ fun KittiesGrid(
         verticalArrangement = Arrangement.spacedBy(5.dp),
         horizontalArrangement = Arrangement.spacedBy(5.dp),
     ) {
-        items(kitties, key = { it.id }) {
+        items(breeds, key = { it.id }) {
             ImageItem(
-                image = it.image,
-                isFavourite = it.favourite,
+                image = it.image.url,
+                isFavourite = it.isFavourite,
                 name = it.name,
                 onClick = onClick,
                 onFavourite = onFavourite
@@ -38,19 +40,27 @@ fun KittiesGrid(
 @Composable
 @Preview
 private fun KittiesGridPreview() {
-    val kitties = listOf(
-        Kitty(
+    val breeds = listOf(
+        Breed(
             id = "1",
             name = "Bengal",
-            "https://cdn2.thecatapi.com/images/werXZVLvS.jpg",
-            false,
-        ),
-        Kitty(
-            id = "2",
-            name = "Bengal",
-            "https://cdn2.thecatapi.com/images/werXZVLvS.jpg",
-            false,
-        ),
+            temperament = "",
+            origin = "",
+            countryCodes = "",
+            countryCode = "",
+            lifeSpan = "",
+            wikipediaUrl = "",
+            image = Image(
+                id = "",
+                width = 1,
+                height = 1,
+                url = "https://cdn2.thecatapi.com/images/werXZVLvS.jpg"
+            ),
+            weight = MassUnit(
+                imperial = "",
+                metric = ""
+            )
+        )
     )
-    KittiesGrid(kitties, {}, {})
+    KittiesGrid(breeds, {}, {})
 }

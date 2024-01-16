@@ -58,6 +58,9 @@ android {
 
 dependencies {
 
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
+
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
