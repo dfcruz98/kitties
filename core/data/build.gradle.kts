@@ -54,4 +54,8 @@ dependencies {
 
     // TODO: Remove this dependency
     implementation(libs.retrofit)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+
+    implementation(libs.paging.runtime.ktx)
 }

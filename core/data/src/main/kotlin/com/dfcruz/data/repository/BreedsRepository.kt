@@ -1,9 +1,10 @@
 package com.dfcruz.data.repository
 
-import com.dfcruz.database.entity.BreedEntity
+import androidx.paging.PagingData
+import com.dfcruz.model.Breed
 import kotlinx.coroutines.flow.Flow
 
 interface BreedsRepository {
 
-    fun getBreeds(): Flow<List<BreedEntity>>
+    fun getBreeds(): Flow<PagingData<Breed>>
 }

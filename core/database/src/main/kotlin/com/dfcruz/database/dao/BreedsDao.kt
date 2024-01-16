@@ -1,5 +1,6 @@
 package com.dfcruz.database.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -14,6 +15,9 @@ interface BreedsDao {
 
     @Query("SELECT * FROM breed WHERE id = :id")
     suspend fun get(id: String): BreedEntity
+
+    @Query("SELECT * FROM breed")
+    fun pagingSource(): PagingSource<Int, BreedEntity>
 
     @Query("SELECT * FROM breed")
     fun getAll(): Flow<List<BreedEntity>>
@@ -31,6 +35,6 @@ interface BreedsDao {
     suspend fun delete(breed: BreedEntity)
 
     @Query("DELETE FROM breed")
-    suspend fun clearAll()
+    suspend fun deleteAll()
 
 }

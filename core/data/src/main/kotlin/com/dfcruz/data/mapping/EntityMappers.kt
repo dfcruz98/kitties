@@ -10,6 +10,11 @@ fun List<CatImageDto>.toBreedsEntity(): List<BreedEntity> = this
     .map { image -> image.breeds.map { breed -> breed.toBreedEntity(image) } }
     .flatten()
 
+fun CatImageDto.toBreedsEntity(): List<BreedEntity> {
+    return this.breeds.map { breed -> breed.toBreedEntity(this) }
+}
+
+
 fun BreedDto.toBreedEntity(catImageDto: CatImageDto): BreedEntity = BreedEntity(
     id = this.id,
     name = this.name,

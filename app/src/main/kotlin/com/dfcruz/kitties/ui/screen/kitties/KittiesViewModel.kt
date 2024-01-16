@@ -1,17 +1,20 @@
 package com.dfcruz.kitties.ui.screen.kitties
 
 import androidx.lifecycle.ViewModel
-import com.dfcruz.model.Breed
-import com.dfcruz.model.Image
-import com.dfcruz.model.MassUnit
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
+import com.dfcruz.data.repository.BreedsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class KittiesViewModel @Inject constructor() : ViewModel() {
+class KittiesViewModel @Inject constructor(
+    breedsRepository: BreedsRepository,
+) : ViewModel() {
 
+    val breeds = breedsRepository.getBreeds().cachedIn(viewModelScope)
+
+    /*
     private val breedss = List(20) { index ->
         Breed(
             id = "$index",
@@ -37,4 +40,6 @@ class KittiesViewModel @Inject constructor() : ViewModel() {
 
     private val _breeds = MutableStateFlow(breedss)
     val breeds = _breeds.asStateFlow()
+
+     */
 }

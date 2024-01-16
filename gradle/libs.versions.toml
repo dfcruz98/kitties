@@ -9,7 +9,7 @@ lifecycle-runtime-ktx = "2.7.0"
 activity-compose = "1.8.2"
 compose-bom = "2023.10.01"
 hilt = "2.48.1"
-hilt-navigation-compose="1.1.0"
+hilt-navigation-compose = "1.1.0"
 coil-compose = "2.5.0"
 retrofit = "2.9.0"
 okhttp = "5.0.0-alpha.2"
@@ -17,6 +17,9 @@ room = "2.6.1"
 ksp = "1.9.10-1.0.13"
 org-jetbrains-kotlin-jvm = "1.9.0"
 composeStableMarker = "1.0.3"
+paging-runtime-ktx = "3.2.1"
+paging-compose = "3.2.1"
+paging-room = "2.6.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -45,6 +48,9 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 compose-stable-marker = { group = "com.github.skydoves", name = "compose-stable-marker", version.ref = "composeStableMarker" }
+paging-runtime-ktx = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging-runtime-ktx" }
+paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging-compose" }
+room-paging = { group = "androidx.room", name = "room-paging", version.ref = "paging-room" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

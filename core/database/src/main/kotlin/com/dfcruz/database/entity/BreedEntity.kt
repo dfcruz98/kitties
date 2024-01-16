@@ -14,7 +14,7 @@ data class BreedEntity(
     val countryCodes: String,
     val countryCode: String,
     val lifeSpan: String,
-    val wikipediaUrl: String,
+    val wikipediaUrl: String?,
     val favourite: Boolean,
     @Embedded(prefix = "image_")
     val imageEntity: ImageEntity,
