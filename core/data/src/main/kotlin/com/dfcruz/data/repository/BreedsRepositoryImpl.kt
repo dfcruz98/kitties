@@ -15,6 +15,8 @@ import com.dfcruz.network.service.CatsService
 import com.dfcruz.network.util.RequestResult
 import com.dfcruz.network.util.tryMakingRequest
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -55,6 +57,10 @@ class BreedsRepositoryImpl @Inject constructor(
             }
     }
 
+    override fun getBreed(id: String): Flow<Breed> {
+        return database.breedsDao().get(id).map { it.toBreed() }
+    }
+
     private suspend fun getRemoteBreeds(): List<BreedEntity> {
         val response = tryMakingRequest {
             catsService.getImages(100, 1, 0)
@@ -83,7 +89,7 @@ class BreedsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun toggleBreedFavourite(id: String) {
-        val breed = database.breedsDao().get(id)
+        val breed = database.breedsDao().get(id).first()
         breed.copy(favourite = !breed.favourite).also {
             database.breedsDao().update(it)
         }

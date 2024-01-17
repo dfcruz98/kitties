@@ -11,6 +11,8 @@ data class BreedDto(
     val temperament: String,
     @SerializedName("origin")
     val origin: String,
+    @SerializedName("description")
+    val description: String,
     @SerializedName("country_codes")
     val countryCodes: String,
     @SerializedName("country_code")

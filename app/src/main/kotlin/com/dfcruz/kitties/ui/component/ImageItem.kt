@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -48,7 +49,8 @@ fun ImageItem(
                 )
                 Text(
                     text = name,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
             FavouriteIcon(
@@ -56,7 +58,6 @@ fun ImageItem(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(top = 5.dp, end = 5.dp),
-
                 onClick = onFavourite
             )
         }

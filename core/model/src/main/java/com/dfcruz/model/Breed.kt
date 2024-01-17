@@ -8,6 +8,7 @@ data class Breed(
     val name: String,
     val temperament: String,
     val origin: String,
+    val description: String,
     val countryCodes: String,
     val countryCode: String,
     val lifeSpan: String,

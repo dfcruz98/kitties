@@ -23,6 +23,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.dfcruz.kitties.navigation.TopLevelDestination
+import com.dfcruz.kitties.ui.screen.details.detailsScreen
+import com.dfcruz.kitties.ui.screen.details.navigateToDetails
+import com.dfcruz.kitties.ui.screen.favourites.favouritesNavigationRoute
 import com.dfcruz.kitties.ui.screen.favourites.favouritesScreen
 import com.dfcruz.kitties.ui.screen.favourites.navigateToFavourites
 import com.dfcruz.kitties.ui.screen.kitties.kittiesNavigationRoute
@@ -32,7 +35,15 @@ import com.dfcruz.kitties.ui.screen.kitties.navigateToKitties
 @Composable
 fun KittiesApp() {
     val navController = rememberNavController()
+    val backStackState = navController.currentBackStackEntryAsState().value
     val screens = remember { listOf(TopLevelDestination.KITTIES, TopLevelDestination.FAVOURITES) }
+
+    //Hide the bottom navigation when the user is in the details screen
+    val isBottomBarVisible = remember(key1 = backStackState) {
+        backStackState?.destination?.route == kittiesNavigationRoute ||
+                backStackState?.destination?.route == favouritesNavigationRoute
+    }
+
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -40,7 +51,9 @@ fun KittiesApp() {
     ) {
         Scaffold(
             bottomBar = {
-                KittiesBottomNavBar(navController, screens)
+                if (isBottomBarVisible) {
+                    KittiesBottomNavBar(navController, screens)
+                }
             }
         ) { innerPadding ->
             NavHost(
@@ -48,8 +61,13 @@ fun KittiesApp() {
                 startDestination = kittiesNavigationRoute,
                 modifier = Modifier.padding(innerPadding)
             ) {
-                kittiesScreen()
-                favouritesScreen()
+                kittiesScreen {
+                    navController.navigateToDetails(it)
+                }
+                favouritesScreen {
+                    navController.navigateToDetails(it)
+                }
+                detailsScreen { navController.popBackStack() }
             }
         }
     }

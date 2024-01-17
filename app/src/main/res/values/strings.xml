@@ -2,4 +2,7 @@
     <string name="app_name">Kitties</string>
     <string name="kitties">Kitties</string>
     <string name="favourites">Favourites</string>
+    <string name="origin">Origin</string>
+    <string name="temperament">Temperament</string>
+    <string name="about">About</string>
 </resources>

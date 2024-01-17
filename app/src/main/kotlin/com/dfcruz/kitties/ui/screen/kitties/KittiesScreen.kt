@@ -20,12 +20,13 @@ import com.dfcruz.kitties.ui.component.KittiesGrid
 
 @Composable
 fun KittiesScreen(
+    onItemClicked: (String) -> Unit,
     viewModel: KittiesViewModel = hiltViewModel()
 ) {
     val breeds = viewModel.breeds.collectAsState()
     KittiesGrid(
         breeds = breeds.value,
-        onClick = {},
+        onItemClicked = onItemClicked,
         onFavourite = {
             viewModel.toggleFavourite(it)
         }

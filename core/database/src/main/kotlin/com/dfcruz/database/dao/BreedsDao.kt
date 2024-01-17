@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.Flow
 interface BreedsDao {
 
     @Query("SELECT * FROM breed WHERE id = :id")
-    suspend fun get(id: String): BreedEntity
+    fun get(id: String): Flow<BreedEntity>
 
     @Query("SELECT * FROM breed")
     fun pagingSource(): PagingSource<Int, BreedEntity>

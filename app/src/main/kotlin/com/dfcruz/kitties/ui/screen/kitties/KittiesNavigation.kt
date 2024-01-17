@@ -11,10 +11,10 @@ fun NavController.navigateToKitties(navOptions: NavOptions? = null) {
     this.navigate(kittiesNavigationRoute, navOptions)
 }
 
-fun NavGraphBuilder.kittiesScreen() {
+fun NavGraphBuilder.kittiesScreen(onItemClicked: (String) -> Unit) {
     composable(
         route = kittiesNavigationRoute,
     ) {
-        KittiesScreen()
+        KittiesScreen(onItemClicked)
     }
 }

@@ -16,12 +16,12 @@ import com.dfcruz.model.MassUnit
 @Composable
 fun KittiesGrid(
     breeds: List<Breed>,
-    onClick: () -> Unit,
+    onItemClicked: (String) -> Unit,
     onFavourite: (String) -> Unit,
 ) {
     LazyVerticalGrid(
         modifier = Modifier.fillMaxSize(),
-        columns = GridCells.Fixed(3),
+        columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(5.dp),
         horizontalArrangement = Arrangement.spacedBy(5.dp),
     ) {
@@ -30,7 +30,9 @@ fun KittiesGrid(
                 image = it.image.url,
                 isFavourite = it.favourite,
                 name = it.name,
-                onClick = onClick,
+                onClick = {
+                    onItemClicked(it.id)
+                },
                 onFavourite = {
                     onFavourite(it.id)
                 }
@@ -48,6 +50,7 @@ private fun KittiesGridPreview() {
             name = "Bengal",
             temperament = "",
             origin = "",
+            description = "",
             countryCodes = "",
             countryCode = "",
             lifeSpan = "",

@@ -10,6 +10,7 @@ fun BreedEntity.toBreed(): Breed = Breed(
     name = this.name,
     temperament = this.temperament,
     origin = this.origin,
+    description = this.description,
     countryCodes = this.countryCodes,
     countryCode = this.countryCode,
     lifeSpan = this.lifeSpan,

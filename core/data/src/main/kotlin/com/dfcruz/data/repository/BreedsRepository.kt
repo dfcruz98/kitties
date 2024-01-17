@@ -10,6 +10,8 @@ interface BreedsRepository {
 
     fun getBreeds(): Flow<List<Breed>>
 
+    fun getBreed(id: String): Flow<Breed>
+
     fun getFavouriteBreeds(): Flow<List<Breed>>
 
     suspend fun toggleBreedFavourite(id: String)
