@@ -86,4 +86,6 @@ dependencies {
 
     implementation(libs.paging.runtime.ktx)
     implementation(libs.paging.compose)
+
+    implementation(libs.material.icons.extended.android)
 }

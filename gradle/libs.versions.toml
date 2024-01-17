@@ -20,6 +20,7 @@ composeStableMarker = "1.0.3"
 paging-runtime-ktx = "3.2.1"
 paging-compose = "3.2.1"
 paging-room = "2.6.1"
+material-icons-extended-android = "1.5.4"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -51,6 +52,7 @@ compose-stable-marker = { group = "com.github.skydoves", name = "compose-stable-
 paging-runtime-ktx = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging-runtime-ktx" }
 paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging-compose" }
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "paging-room" }
+material-icons-extended-android = { group = "androidx.compose.material", name = "material-icons-extended-android", version.ref = "material-icons-extended-android" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
