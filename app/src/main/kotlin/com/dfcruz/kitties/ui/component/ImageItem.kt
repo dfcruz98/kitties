@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -70,14 +71,24 @@ private fun FavouriteIcon(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    val icon = if (isFavourite) KittiesIcons.Favourite else KittiesIcons.NotFavourite
-    Icon(
-        imageVector = icon,
-        contentDescription = null,
-        modifier = modifier.clickable {
-            onClick()
-        }
-    )
+    if (isFavourite) {
+        Icon(
+            imageVector = KittiesIcons.Favourite,
+            contentDescription = null,
+            modifier = modifier.clickable {
+                onClick()
+            },
+            tint = Color.Red
+        )
+    } else {
+        Icon(
+            imageVector = KittiesIcons.NotFavourite,
+            contentDescription = null,
+            modifier = modifier.clickable {
+                onClick()
+            }
+        )
+    }
 }
 
 @Composable
