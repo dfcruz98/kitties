@@ -8,9 +8,9 @@ enum class TopLevelDestination(
     val icon: ImageVector,
     val iconTextId: Int,
 ) {
-    KITTIES(
+    CAT_BREEDS(
         icon = KittiesIcons.Home,
-        iconTextId = R.string.kitties,
+        iconTextId = R.string.cats,
     ),
     FAVOURITES(
         icon = KittiesIcons.Favourite,
