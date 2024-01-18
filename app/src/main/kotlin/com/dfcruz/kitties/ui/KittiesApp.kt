@@ -28,9 +28,9 @@ import com.dfcruz.kitties.ui.screen.details.navigateToDetails
 import com.dfcruz.kitties.ui.screen.favourites.favouritesNavigationRoute
 import com.dfcruz.kitties.ui.screen.favourites.favouritesScreen
 import com.dfcruz.kitties.ui.screen.favourites.navigateToFavourites
-import com.dfcruz.kitties.ui.screen.kitties.kittiesNavigationRoute
-import com.dfcruz.kitties.ui.screen.kitties.kittiesScreen
-import com.dfcruz.kitties.ui.screen.kitties.navigateToKitties
+import com.dfcruz.kitties.ui.screen.catbreeds.kittiesNavigationRoute
+import com.dfcruz.kitties.ui.screen.catbreeds.kittiesScreen
+import com.dfcruz.kitties.ui.screen.catbreeds.navigateToKitties
 
 @Composable
 fun KittiesApp() {

@@ -32,7 +32,7 @@ internal object DatabaseModule {
     fun provideBreedsDao(
         database: KittiesDatabase
     ): BreedsDao {
-        return database.breedsDao()
+        return database.catBreedsDao()
     }
 
 }

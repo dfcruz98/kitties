@@ -4,8 +4,8 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "breed")
-data class BreedEntity(
+@Entity(tableName = "cat_breed")
+data class CatBreedEntity(
     @PrimaryKey(autoGenerate = false)
     val id: String,
     val name: String,

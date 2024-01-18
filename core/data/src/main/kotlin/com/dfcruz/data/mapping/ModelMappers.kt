@@ -1,11 +1,11 @@
 package com.dfcruz.data.mapping
 
-import com.dfcruz.database.entity.BreedEntity
-import com.dfcruz.model.Breed
+import com.dfcruz.database.entity.CatBreedEntity
+import com.dfcruz.model.CatBreed
 import com.dfcruz.model.Image
 import com.dfcruz.model.MassUnit
 
-fun BreedEntity.toBreed(): Breed = Breed(
+fun CatBreedEntity.toBreed(): CatBreed = CatBreed(
     id = this.id,
     name = this.name,
     temperament = this.temperament,

@@ -3,7 +3,7 @@ package com.dfcruz.kitties.ui.screen.details
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dfcruz.data.repository.BreedsRepository
+import com.dfcruz.data.repository.CatBreedsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -12,13 +12,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    private val breedsRepository: BreedsRepository,
+    private val catBreedsRepository: CatBreedsRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val breedId: String = checkNotNull(savedStateHandle[BREED_ID])
 
-    val breed = breedsRepository.getBreed(breedId)
+    val catBreed = catBreedsRepository.getBreed(breedId)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
@@ -27,7 +27,7 @@ class DetailsViewModel @Inject constructor(
 
     fun toggleFavourite() {
         viewModelScope.launch {
-            breedsRepository.toggleBreedFavourite(breedId)
+            catBreedsRepository.toggleBreedFavourite(breedId)
         }
     }
 }

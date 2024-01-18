@@ -1,21 +1,21 @@
 package com.dfcruz.data.mapping
 
-import com.dfcruz.database.entity.BreedEntity
+import com.dfcruz.database.entity.CatBreedEntity
 import com.dfcruz.database.entity.ImageEntity
 import com.dfcruz.database.entity.MassUnitEntity
-import com.dfcruz.network.dto.BreedDto
+import com.dfcruz.network.dto.CatBreedDto
 import com.dfcruz.network.dto.CatImageDto
 
-fun List<CatImageDto>.toBreedsEntity(): List<BreedEntity> = this
+fun List<CatImageDto>.toBreedsEntity(): List<CatBreedEntity> = this
     .map { image -> image.breeds.map { breed -> breed.toBreedEntity(image) } }
     .flatten()
 
-fun CatImageDto.toBreedsEntity(): List<BreedEntity> {
+fun CatImageDto.toBreedsEntity(): List<CatBreedEntity> {
     return this.breeds.map { breed -> breed.toBreedEntity(this) }
 }
 
 
-fun BreedDto.toBreedEntity(catImageDto: CatImageDto): BreedEntity = BreedEntity(
+fun CatBreedDto.toBreedEntity(catImageDto: CatImageDto): CatBreedEntity = CatBreedEntity(
     id = this.id,
     name = this.name,
     temperament = this.temperament,

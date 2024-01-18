@@ -1,6 +1,6 @@
 package com.dfcruz.database.entity
 
-class MassUnitEntity(
+data class MassUnitEntity(
     val imperial: String,
     val metric: String,
 )

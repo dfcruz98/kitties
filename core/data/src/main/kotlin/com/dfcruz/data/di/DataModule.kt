@@ -1,7 +1,7 @@
 package com.dfcruz.data.di
 
-import com.dfcruz.data.repository.BreedsRepository
-import com.dfcruz.data.repository.BreedsRepositoryImpl
+import com.dfcruz.data.repository.CatBreedsRepository
+import com.dfcruz.data.repository.CatsRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,6 +12,6 @@ import dagger.hilt.components.SingletonComponent
 interface DataModule {
 
     @Binds
-    fun bindsBreedsRepository(breedsRepository: BreedsRepositoryImpl): BreedsRepository
+    fun bindsBreedsRepository(breedsRepository: CatsRepositoryImpl): CatBreedsRepository
 
 }

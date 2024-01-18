@@ -1,4 +1,4 @@
-package com.dfcruz.kitties.ui.screen.kitties
+package com.dfcruz.kitties.ui.screen.catbreeds
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder

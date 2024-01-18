@@ -2,7 +2,7 @@ package com.dfcruz.network.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class BreedDto(
+data class CatBreedDto(
     val weight: MassUnitsDto,
     val id: String,
     @SerializedName("name")

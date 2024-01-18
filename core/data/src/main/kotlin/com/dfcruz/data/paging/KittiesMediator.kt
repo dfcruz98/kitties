@@ -9,7 +9,7 @@ import androidx.room.withTransaction
 import com.dfcruz.data.mapping.toBreedsEntity
 import com.dfcruz.database.KittiesDatabase
 import com.dfcruz.database.dao.BreedsPageDao
-import com.dfcruz.database.entity.BreedEntity
+import com.dfcruz.database.entity.CatBreedEntity
 import com.dfcruz.database.entity.BreedPageEntity
 import com.dfcruz.network.service.CatsService
 import com.dfcruz.network.util.RequestResult
@@ -20,13 +20,13 @@ import javax.inject.Inject
 class KittiesMediator @Inject constructor(
     private val database: KittiesDatabase,
     private val catsService: CatsService,
-) : RemoteMediator<Int, BreedEntity>() {
+) : RemoteMediator<Int, CatBreedEntity>() {
 
-    private val breedsPageDao: BreedsPageDao = database.breedsPageDao()
-    private val breedsDao = database.breedsDao()
+    private val breedsPageDao: BreedsPageDao = database.catBreedsPageDao()
+    private val breedsDao = database.catBreedsDao()
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, BreedEntity>
+        state: PagingState<Int, CatBreedEntity>
     ): MediatorResult {
 
         Log.d("KittiesMediator", "loadType=$loadType")
@@ -78,7 +78,7 @@ class KittiesMediator @Inject constructor(
 
                 Log.d("KittiesMediator", "endOfPaginationReached=$endOfPaginationReached, prevPage=$prevPage, nextPage=$nextPage, response=${response.value.size}")
 
-                val breeds = mutableListOf<BreedEntity>()
+                val breeds = mutableListOf<CatBreedEntity>()
                 val pages = mutableListOf<BreedPageEntity>()
 
                 response.value.forEach { image ->
@@ -114,7 +114,7 @@ class KittiesMediator @Inject constructor(
     }
 
     private suspend fun getRemoteKeyClosestToCurrentPosition(
-        state: PagingState<Int, BreedEntity>
+        state: PagingState<Int, CatBreedEntity>
     ): BreedPageEntity? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { id ->
@@ -124,7 +124,7 @@ class KittiesMediator @Inject constructor(
     }
 
     private suspend fun getRemoteKeyForFirstItem(
-        state: PagingState<Int, BreedEntity>
+        state: PagingState<Int, CatBreedEntity>
     ): BreedPageEntity? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
             ?.let { challenge ->
@@ -133,7 +133,7 @@ class KittiesMediator @Inject constructor(
     }
 
     private suspend fun getRemoteKeyForLastItem(
-        state: PagingState<Int, BreedEntity>
+        state: PagingState<Int, CatBreedEntity>
     ): BreedPageEntity? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { challenge ->

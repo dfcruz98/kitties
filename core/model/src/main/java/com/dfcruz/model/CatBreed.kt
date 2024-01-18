@@ -3,7 +3,7 @@ package com.dfcruz.model
 import androidx.compose.runtime.Immutable
 
 @Immutable
-data class Breed(
+data class CatBreed(
     val id: String,
     val name: String,
     val temperament: String,

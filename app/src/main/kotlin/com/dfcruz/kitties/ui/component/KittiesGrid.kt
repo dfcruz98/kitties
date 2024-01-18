@@ -9,13 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dfcruz.model.Breed
+import com.dfcruz.model.CatBreed
 import com.dfcruz.model.Image
 import com.dfcruz.model.MassUnit
 
 @Composable
 fun KittiesGrid(
-    breeds: List<Breed>,
+    catBreeds: List<CatBreed>,
     onItemClicked: (String) -> Unit,
     onFavourite: (String) -> Unit,
 ) {
@@ -25,7 +25,7 @@ fun KittiesGrid(
         verticalArrangement = Arrangement.spacedBy(5.dp),
         horizontalArrangement = Arrangement.spacedBy(5.dp),
     ) {
-        items(breeds, key = { it.id }) {
+        items(catBreeds, key = { it.id }) {
             ImageItem(
                 image = it.image.url,
                 isFavourite = it.favourite,
@@ -44,8 +44,8 @@ fun KittiesGrid(
 @Composable
 @Preview
 private fun KittiesGridPreview() {
-    val breeds = listOf(
-        Breed(
+    val catBreeds = listOf(
+        CatBreed(
             id = "1",
             name = "Bengal",
             temperament = "",
@@ -67,5 +67,5 @@ private fun KittiesGridPreview() {
             )
         )
     )
-    KittiesGrid(breeds, {}, {})
+    KittiesGrid(catBreeds, {}, {})
 }

@@ -12,7 +12,7 @@ data class CatImageDto(
     @SerializedName("url")
     val url: String,
     @SerializedName("breeds")
-    val breeds: List<BreedDto>
+    val breeds: List<CatBreedDto>
 )
 
 
