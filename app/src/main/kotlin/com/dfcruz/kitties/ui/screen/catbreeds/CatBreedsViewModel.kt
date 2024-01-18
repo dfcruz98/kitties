@@ -1,6 +1,5 @@
 package com.dfcruz.kitties.ui.screen.catbreeds
 
-import androidx.compose.ui.text.toUpperCase
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dfcruz.data.repository.CatBreedsRepository

@@ -9,7 +9,6 @@ import com.dfcruz.data.mapping.toBreed
 import com.dfcruz.data.mapping.toBreedsEntity
 import com.dfcruz.data.paging.PagingMediator
 import com.dfcruz.database.KittiesDatabase
-import com.dfcruz.database.entity.CatBreedEntity
 import com.dfcruz.model.CatBreed
 import com.dfcruz.network.service.CatsService
 import com.dfcruz.network.util.RequestResult
