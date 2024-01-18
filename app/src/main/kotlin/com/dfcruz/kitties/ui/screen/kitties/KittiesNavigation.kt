@@ -15,6 +15,6 @@ fun NavGraphBuilder.kittiesScreen(onItemClicked: (String) -> Unit) {
     composable(
         route = kittiesNavigationRoute,
     ) {
-        KittiesScreen(onItemClicked)
+        KittiesRoute(onItemClicked)
     }
 }
