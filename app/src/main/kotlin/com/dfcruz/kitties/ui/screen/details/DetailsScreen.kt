@@ -58,30 +58,6 @@ fun DetailsScreen(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        FilledIconButton(
-            modifier = Modifier
-                .padding(start = Dimen.largePadding, top = Dimen.mediumPadding)
-                .align(Alignment.TopStart),
-            onClick = onBackPressed,
-        ) {
-            Icon(
-                imageVector = KittiesIcons.ArrowBack,
-                contentDescription = null
-            )
-        }
-
-        FilledIconButton(
-            modifier = Modifier
-                .padding(end = Dimen.largePadding, top = Dimen.mediumPadding)
-                .align(Alignment.TopEnd),
-            onClick = onFavouriteToggle
-        ) {
-            Icon(
-                imageVector = if (catBreed.favourite) KittiesIcons.Favourite else KittiesIcons.NotFavourite,
-                contentDescription = null
-            )
-        }
-
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
@@ -105,6 +81,29 @@ fun DetailsScreen(
             )
         }
 
+        FilledIconButton(
+            modifier = Modifier
+                .padding(start = Dimen.largePadding, top = Dimen.mediumPadding)
+                .align(Alignment.TopStart),
+            onClick = onBackPressed,
+        ) {
+            Icon(
+                imageVector = KittiesIcons.ArrowBack,
+                contentDescription = null
+            )
+        }
+
+        FilledIconButton(
+            modifier = Modifier
+                .padding(end = Dimen.largePadding, top = Dimen.mediumPadding)
+                .align(Alignment.TopEnd),
+            onClick = onFavouriteToggle
+        ) {
+            Icon(
+                imageVector = if (catBreed.favourite) KittiesIcons.Favourite else KittiesIcons.NotFavourite,
+                contentDescription = null
+            )
+        }
 
     }
 }

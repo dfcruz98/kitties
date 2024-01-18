@@ -28,7 +28,7 @@ interface BreedsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(catBreeds: CatBreedEntity)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(catBreeds: List<CatBreedEntity>)
 
     @Update

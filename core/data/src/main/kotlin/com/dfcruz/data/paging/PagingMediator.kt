@@ -17,7 +17,7 @@ import com.dfcruz.network.util.tryMakingRequest
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class KittiesMediator @Inject constructor(
+class PagingMediator @Inject constructor(
     private val database: KittiesDatabase,
     private val catsService: CatsService,
 ) : RemoteMediator<Int, CatBreedEntity>() {
@@ -29,7 +29,7 @@ class KittiesMediator @Inject constructor(
         state: PagingState<Int, CatBreedEntity>
     ): MediatorResult {
 
-        Log.d("KittiesMediator", "loadType=$loadType")
+        Log.d("PagingMediator", "loadType=$loadType")
 
         val currentPage = when (loadType) {
             LoadType.REFRESH -> {
@@ -54,18 +54,24 @@ class KittiesMediator @Inject constructor(
             }
         }
 
-        Log.d("KittiesMediator", "currentPage=$currentPage")
+        Log.d("PagingMediator", "currentPage=$currentPage")
 
         return when (val response =
-            tryMakingRequest { catsService.getImages(30, 1, currentPage) }
+            tryMakingRequest { catsService.getImages(70, 1, currentPage) }
         ) {
             is RequestResult.Error -> {
-                Log.d("KittiesMediator", "Error")
-                return MediatorResult.Error(Throwable())
+                Log.d(
+                    "PagingMediator",
+                    "Error - ${response.message ?: "An unknown error occurred while fetching images"}"
+                )
+                return MediatorResult.Error(Throwable("Error fetching images"))
             }
 
             is RequestResult.Exception -> {
-                Log.d("KittiesMediator", response.ex.message ?: "Something went wrong!")
+                Log.d(
+                    "PagingMediator",
+                    "Exception - ${response.ex.message ?: "An Exception occurred while fetching images"}"
+                )
                 return MediatorResult.Error(response.ex)
             }
 
@@ -76,7 +82,10 @@ class KittiesMediator @Inject constructor(
                 val prevPage = if (currentPage == 0) null else currentPage - 1
                 val nextPage = if (endOfPaginationReached) null else currentPage + 1
 
-                Log.d("KittiesMediator", "endOfPaginationReached=$endOfPaginationReached, prevPage=$prevPage, nextPage=$nextPage, response=${response.value.size}")
+                Log.d(
+                    "PagingMediator",
+                    "endOfPaginationReached=$endOfPaginationReached, prevPage=$prevPage, nextPage=$nextPage, response=${response.value.size}"
+                )
 
                 val breeds = mutableListOf<CatBreedEntity>()
                 val pages = mutableListOf<BreedPageEntity>()

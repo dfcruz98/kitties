@@ -36,7 +36,7 @@ import com.dfcruz.kitties.ui.screen.catbreeds.catBreedsToKitties
 fun KittiesApp() {
     val navController = rememberNavController()
     val backStackState = navController.currentBackStackEntryAsState().value
-    val screens = remember { listOf(TopLevelDestination.KITTIES, TopLevelDestination.FAVOURITES) }
+    val screens = remember { listOf(TopLevelDestination.CAT_BREEDS, TopLevelDestination.FAVOURITES) }
 
     //Hide the bottom navigation when the user is in the details screen
     val isBottomBarVisible = remember(key1 = backStackState) {
@@ -107,7 +107,7 @@ fun KittiesBottomNavBar(
                     }
 
                     when (destination) {
-                        TopLevelDestination.KITTIES -> navController.catBreedsToKitties(
+                        TopLevelDestination.CAT_BREEDS -> navController.catBreedsToKitties(
                             topLevelNavOptions
                         )
 

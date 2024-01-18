@@ -7,7 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.dfcruz.data.mapping.toBreed
 import com.dfcruz.data.mapping.toBreedsEntity
-import com.dfcruz.data.paging.KittiesMediator
+import com.dfcruz.data.paging.PagingMediator
 import com.dfcruz.database.KittiesDatabase
 import com.dfcruz.database.entity.CatBreedEntity
 import com.dfcruz.model.CatBreed
@@ -20,6 +20,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
+// Flag indicating that the request of the images should only return images that have an associated race
+// Documentation: https://developers.thecatapi.com/view-account/ylX4blBYT9FaoVd6OhvR?report=bOoHBz-8t
+const val REQUEST_WITH_BREED = 1
+
 class CatsRepositoryImpl @Inject constructor(
     private val catsService: CatsService,
     private val database: KittiesDatabase,
@@ -29,7 +33,7 @@ class CatsRepositoryImpl @Inject constructor(
     override fun getBreedsPaging(): Flow<PagingData<CatBreed>> {
         val pager = Pager(
             config = PagingConfig(pageSize = 100),
-            remoteMediator = KittiesMediator(
+            remoteMediator = PagingMediator(
                 database = database,
                 catsService = catsService,
             ),
@@ -47,7 +51,16 @@ class CatsRepositoryImpl @Inject constructor(
         return database.catBreedsDao().getAll()
             .onEach {
                 if (it.isEmpty()) {
-                    val breeds = getRemoteBreeds()
+                    val response = tryMakingRequest {
+                        catsService.getImages(100, REQUEST_WITH_BREED, 0)
+                    }
+
+                    val breeds = when (response) {
+                        is RequestResult.Error,
+                        is RequestResult.Exception -> listOf()
+
+                        is RequestResult.Success -> response.value.toBreedsEntity()
+                    }
                     database.catBreedsDao().insertAll(breeds)
                 }
             }.map { breeds ->
@@ -57,26 +70,6 @@ class CatsRepositoryImpl @Inject constructor(
 
     override fun getBreed(id: String): Flow<CatBreed> {
         return database.catBreedsDao().get(id).map { it.toBreed() }
-    }
-
-    private suspend fun getRemoteBreeds(): List<CatBreedEntity> {
-        val response = tryMakingRequest {
-            catsService.getImages(100, 1, 0)
-        }
-
-        return when (response) {
-            is RequestResult.Error -> {
-                listOf()
-            }
-
-            is RequestResult.Exception -> {
-                listOf()
-            }
-
-            is RequestResult.Success -> {
-                response.value.toBreedsEntity()
-            }
-        }
     }
 
     override fun getFavouriteBreeds(): Flow<List<CatBreed>> {
