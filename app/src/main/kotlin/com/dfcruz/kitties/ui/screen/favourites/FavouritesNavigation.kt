@@ -15,6 +15,6 @@ fun NavGraphBuilder.favouritesScreen(onItemClicked: (String) -> Unit) {
     composable(
         route = favouritesNavigationRoute,
     ) {
-        FavouritesScreen(onItemClicked)
+        FavouritesRoute(onItemClicked)
     }
 }

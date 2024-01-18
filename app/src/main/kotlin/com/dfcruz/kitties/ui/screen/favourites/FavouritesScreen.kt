@@ -1,47 +1,66 @@
 package com.dfcruz.kitties.ui.screen.favourites
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.dfcruz.kitties.ui.component.KittiesGrid
+import com.dfcruz.kitties.R
+import com.dfcruz.kitties.ui.component.VerticalGrid
+import com.dfcruz.kitties.ui.theme.Dimen
+import com.dfcruz.model.CatBreed
 
 @Composable
-fun FavouritesScreen(
+fun FavouritesRoute(
     onItemClicked: (String) -> Unit,
     viewModel: FavouritesViewModel = hiltViewModel()
 ) {
-    val breeds = viewModel.breeds.collectAsState().value
+    val catBreeds = viewModel.breeds.collectAsState().value
+    FavouritesScreen(
+        catBreeds = catBreeds,
+        onItemClicked = onItemClicked,
+        onFavouriteClicked = {
+            viewModel.toggleFavourite(it)
+        }
+    )
+}
+
+@Composable
+fun FavouritesScreen(
+    catBreeds: List<CatBreed>,
+    onItemClicked: (String) -> Unit,
+    onFavouriteClicked: (String) -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Text(
-            modifier = Modifier.padding(start = 15.dp, top = 15.dp),
-            text = "Favourites",
+            modifier = Modifier
+                .padding(
+                    start = Dimen.largePadding,
+                    top = Dimen.largePadding
+                ),
+            text = stringResource(id = R.string.favourites),
             style = MaterialTheme.typography.displaySmall
         )
-        Spacer(
-            modifier = Modifier
-                .height(0.dp)
-                .fillMaxWidth()
-        )
-        KittiesGrid(
-            catBreeds = breeds,
+        VerticalGrid(
+            catBreeds = catBreeds,
             onItemClicked = onItemClicked,
-            onFavourite = {
-                viewModel.toggleFavourite(it)
-            }
+            onFavouriteClicked = onFavouriteClicked
         )
     }
+}
 
+
+@Preview
+@Composable
+private fun FavouritesScreenPreview() {
+    FavouritesScreen(catBreeds = listOf(), onItemClicked = {}, onFavouriteClicked = {})
 }

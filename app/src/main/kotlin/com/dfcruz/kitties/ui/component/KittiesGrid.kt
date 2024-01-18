@@ -1,40 +1,40 @@
 package com.dfcruz.kitties.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.dfcruz.kitties.ui.theme.Dimen
 import com.dfcruz.model.CatBreed
 import com.dfcruz.model.Image
 import com.dfcruz.model.MassUnit
 
 @Composable
-fun KittiesGrid(
+fun VerticalGrid(
     catBreeds: List<CatBreed>,
+    modifier: Modifier = Modifier,
     onItemClicked: (String) -> Unit,
-    onFavourite: (String) -> Unit,
+    onFavouriteClicked: (String) -> Unit,
 ) {
     LazyVerticalGrid(
-        modifier = Modifier.fillMaxSize(),
-        columns = GridCells.Fixed(2),
-        verticalArrangement = Arrangement.spacedBy(5.dp),
-        horizontalArrangement = Arrangement.spacedBy(5.dp),
+        modifier = modifier,
+        columns = GridCells.Fixed(3),
+        verticalArrangement = Arrangement.spacedBy(Dimen.gridSpace),
+        horizontalArrangement = Arrangement.spacedBy(Dimen.gridSpace),
     ) {
         items(catBreeds, key = { it.id }) {
             ImageItem(
                 image = it.image.url,
-                isFavourite = it.favourite,
-                name = it.name,
+                favourite = it.favourite,
+                displayText = it.name,
                 onClick = {
                     onItemClicked(it.id)
                 },
                 onFavourite = {
-                    onFavourite(it.id)
+                    onFavouriteClicked(it.id)
                 }
             )
         }
@@ -43,7 +43,7 @@ fun KittiesGrid(
 
 @Composable
 @Preview
-private fun KittiesGridPreview() {
+private fun VerticalGridPreview() {
     val catBreeds = listOf(
         CatBreed(
             id = "1",
@@ -67,5 +67,5 @@ private fun KittiesGridPreview() {
             )
         )
     )
-    KittiesGrid(catBreeds, {}, {})
+    VerticalGrid(catBreeds = catBreeds, onItemClicked = {}, onFavouriteClicked = {})
 }

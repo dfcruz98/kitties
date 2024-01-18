@@ -28,9 +28,9 @@ import com.dfcruz.kitties.ui.screen.details.navigateToDetails
 import com.dfcruz.kitties.ui.screen.favourites.favouritesNavigationRoute
 import com.dfcruz.kitties.ui.screen.favourites.favouritesScreen
 import com.dfcruz.kitties.ui.screen.favourites.navigateToFavourites
-import com.dfcruz.kitties.ui.screen.catbreeds.kittiesNavigationRoute
-import com.dfcruz.kitties.ui.screen.catbreeds.kittiesScreen
-import com.dfcruz.kitties.ui.screen.catbreeds.navigateToKitties
+import com.dfcruz.kitties.ui.screen.catbreeds.catBreedsNavigationRoute
+import com.dfcruz.kitties.ui.screen.catbreeds.catBreedsScreen
+import com.dfcruz.kitties.ui.screen.catbreeds.catBreedsToKitties
 
 @Composable
 fun KittiesApp() {
@@ -40,7 +40,7 @@ fun KittiesApp() {
 
     //Hide the bottom navigation when the user is in the details screen
     val isBottomBarVisible = remember(key1 = backStackState) {
-        backStackState?.destination?.route == kittiesNavigationRoute ||
+        backStackState?.destination?.route == catBreedsNavigationRoute ||
                 backStackState?.destination?.route == favouritesNavigationRoute
     }
 
@@ -58,10 +58,10 @@ fun KittiesApp() {
         ) { innerPadding ->
             NavHost(
                 navController = navController,
-                startDestination = kittiesNavigationRoute,
+                startDestination = catBreedsNavigationRoute,
                 modifier = Modifier.padding(innerPadding)
             ) {
-                kittiesScreen {
+                catBreedsScreen {
                     navController.navigateToDetails(it)
                 }
                 favouritesScreen {
@@ -107,7 +107,7 @@ fun KittiesBottomNavBar(
                     }
 
                     when (destination) {
-                        TopLevelDestination.KITTIES -> navController.navigateToKitties(
+                        TopLevelDestination.KITTIES -> navController.catBreedsToKitties(
                             topLevelNavOptions
                         )
 

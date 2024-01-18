@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,6 +13,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -24,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.dfcruz.kitties.R
+import com.dfcruz.kitties.ui.theme.Dimen
 import com.dfcruz.kitties.ui.theme.KittiesIcons
 import com.dfcruz.model.CatBreed
 import com.dfcruz.model.Image
@@ -51,118 +54,15 @@ fun DetailsScreen(
     onBackPressed: () -> Unit,
     onFavouriteToggle: () -> Unit,
 ) {
-
     Box(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
     ) {
-
-
-        /*
         FilledIconButton(
             modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(end = 15.dp, top = 10.dp),
-            onClick = onFavouriteToggle
-        ) {
-            Icon(
-                imageVector = if (breed.favourite) KittiesIcons.Favourite else KittiesIcons.NotFavourite,
-                contentDescription = null
-            )
-        }
-
-         */
-
-        Column(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .fillMaxHeight(),
-        ) {
-            AsyncImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.40f),
-                model = catBreed.image.url,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-            )
-
-            Spacer(
-                modifier = Modifier
-                    .height(10.dp)
-                    .fillMaxWidth()
-
-            )
-
-            Column(
-                modifier = Modifier.padding(horizontal = 15.dp)
-            ) {
-                Text(
-                    text = catBreed.name,
-                    style = MaterialTheme.typography.displaySmall
-                )
-
-                Spacer(
-                    modifier = Modifier
-                        .height(10.dp)
-                        .fillMaxWidth()
-                )
-
-                Text(
-                    text = stringResource(R.string.origin),
-                    style = MaterialTheme.typography.titleMedium
-                )
-                Text(
-                    text = catBreed.origin,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-
-                Spacer(
-                    modifier = Modifier
-                        .height(10.dp)
-                        .fillMaxWidth()
-                )
-
-                Text(
-                    text = stringResource(R.string.temperament),
-                    style = MaterialTheme.typography.titleMedium
-                )
-
-                Text(
-                    text = catBreed.temperament,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-
-                Spacer(
-                    modifier = Modifier
-                        .height(10.dp)
-                        .fillMaxWidth()
-                )
-
-                Text(
-                    text = stringResource(R.string.about),
-                    style = MaterialTheme.typography.titleMedium
-                )
-
-                Text(
-                    text = catBreed.description,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-
-                Spacer(
-                    modifier = Modifier
-                        .height(10.dp)
-                        .fillMaxWidth()
-                )
-            }
-
-        }
-
-        FilledIconButton(
-            modifier = Modifier
-                .padding(start = 15.dp, top = 10.dp)
+                .padding(start = Dimen.largePadding, top = Dimen.mediumPadding)
                 .align(Alignment.TopStart),
-            onClick = onBackPressed
+            onClick = onBackPressed,
         ) {
             Icon(
                 imageVector = KittiesIcons.ArrowBack,
@@ -172,7 +72,7 @@ fun DetailsScreen(
 
         FilledIconButton(
             modifier = Modifier
-                .padding(end = 15.dp, top = 10.dp)
+                .padding(end = Dimen.largePadding, top = Dimen.mediumPadding)
                 .align(Alignment.TopEnd),
             onClick = onFavouriteToggle
         ) {
@@ -182,7 +82,106 @@ fun DetailsScreen(
             )
         }
 
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize(),
+        ) {
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.40f),
+                model = catBreed.image.url,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+            )
+            Spacer(
+                modifier = Modifier
+                    .height(Dimen.mediumHeight)
+                    .fillMaxWidth()
+            )
+            Details(
+                catBreed = catBreed
+            )
+        }
+
+
     }
+}
+
+@Composable
+fun Details(
+    catBreed: CatBreed,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        modifier = modifier.fillMaxHeight(),
+        color = MaterialTheme.colorScheme.background,
+    ) {
+        Column(
+            modifier = Modifier.padding(horizontal = Dimen.horizontalPadding)
+        ) {
+            Text(
+                text = catBreed.name,
+                style = MaterialTheme.typography.displaySmall
+            )
+
+            Spacer(
+                modifier = Modifier
+                    .height(Dimen.mediumHeight)
+                    .fillMaxWidth()
+            )
+
+            Text(
+                text = stringResource(R.string.origin),
+                style = MaterialTheme.typography.titleMedium
+            )
+            Text(
+                text = catBreed.origin,
+                style = MaterialTheme.typography.bodyMedium
+            )
+
+            Spacer(
+                modifier = Modifier
+                    .height(Dimen.mediumHeight)
+                    .fillMaxWidth()
+            )
+
+            Text(
+                text = stringResource(R.string.temperament),
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Text(
+                text = catBreed.temperament,
+                style = MaterialTheme.typography.bodyMedium
+            )
+
+            Spacer(
+                modifier = Modifier
+                    .height(Dimen.mediumHeight)
+                    .fillMaxWidth()
+            )
+
+            Text(
+                text = stringResource(R.string.about),
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Text(
+                text = catBreed.description,
+                style = MaterialTheme.typography.bodyMedium
+            )
+
+            Spacer(
+                modifier = Modifier
+                    .height(Dimen.mediumHeight)
+                    .fillMaxWidth()
+            )
+        }
+
+    }
+
 }
 
 @Composable

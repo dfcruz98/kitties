@@ -5,16 +5,16 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 
-const val kittiesNavigationRoute = "kitties_route"
+const val catBreedsNavigationRoute = "cat_breeds_route"
 
-fun NavController.navigateToKitties(navOptions: NavOptions? = null) {
-    this.navigate(kittiesNavigationRoute, navOptions)
+fun NavController.catBreedsToKitties(navOptions: NavOptions? = null) {
+    this.navigate(catBreedsNavigationRoute, navOptions)
 }
 
-fun NavGraphBuilder.kittiesScreen(onItemClicked: (String) -> Unit) {
+fun NavGraphBuilder.catBreedsScreen(onItemClicked: (String) -> Unit) {
     composable(
-        route = kittiesNavigationRoute,
+        route = catBreedsNavigationRoute,
     ) {
-        KittiesRoute(onItemClicked)
+        CatBreedsRoute(onItemClicked)
     }
 }

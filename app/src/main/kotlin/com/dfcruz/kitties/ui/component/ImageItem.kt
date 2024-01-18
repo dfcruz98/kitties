@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -14,24 +13,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.dfcruz.kitties.R
+import com.dfcruz.kitties.ui.theme.Dimen
 import com.dfcruz.kitties.ui.theme.KittiesIcons
 
 @Composable
 fun ImageItem(
     image: String,
-    isFavourite: Boolean,
-    name: String,
+    favourite: Boolean,
+    displayText: String,
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     onFavourite: () -> Unit,
 ) {
     Surface(
         modifier = modifier
-            .width(100.dp)
             .clickable {
                 onClick()
             },
@@ -44,20 +44,20 @@ fun ImageItem(
                     modifier = Modifier
                         .aspectRatio(1f),
                     model = image,
-                    contentDescription = "",
+                    contentDescription = stringResource(R.string.cat_image),
                     contentScale = ContentScale.Crop,
                 )
                 Text(
-                    text = name,
+                    text = displayText,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
             FavouriteIcon(
-                isFavourite = isFavourite,
+                isFavourite = favourite,
                 modifier = Modifier
                     .align(Alignment.TopEnd)
-                    .padding(top = 5.dp, end = 5.dp),
+                    .padding(top = Dimen.mediumPadding, end = Dimen.mediumPadding),
                 onClick = onFavourite
             )
         }
@@ -85,8 +85,8 @@ private fun FavouriteIcon(
 private fun ImageItemPreview() {
     ImageItem(
         image = "",
-        isFavourite = false,
-        name = "Bengal",
+        favourite = false,
+        displayText = "Bengal",
         onClick = {
 
         },

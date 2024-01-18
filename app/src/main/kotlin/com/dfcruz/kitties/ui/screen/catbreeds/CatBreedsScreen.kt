@@ -13,25 +13,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.dfcruz.kitties.ui.component.KittiesGrid
+import com.dfcruz.kitties.ui.component.VerticalGrid
 import com.dfcruz.kitties.ui.component.SearchTextField
+import com.dfcruz.kitties.ui.theme.Dimen
 import com.dfcruz.model.CatBreed
 
 @Composable
-fun KittiesRoute(
+fun CatBreedsRoute(
     onItemClicked: (String) -> Unit,
     viewModel: CatBreedsViewModel = hiltViewModel()
 ) {
     val breeds = viewModel.catBreeds.collectAsState()
-    KittiesScreen(breeds.value, onItemClicked) {
+    CatBreedsScreen(breeds.value, onItemClicked) {
         viewModel.toggleFavourite(it)
     }
 }
 
 @Composable
-fun KittiesScreen(
+fun CatBreedsScreen(
     catBreeds: List<CatBreed>,
     onItemClicked: (String) -> Unit,
     onFavourite: (String) -> Unit,
@@ -39,17 +39,17 @@ fun KittiesScreen(
 
     Column {
         Column(
-            modifier = Modifier.padding(horizontal = 15.dp)
+            modifier = Modifier.padding(horizontal = Dimen.horizontalPadding)
         ) {
             Text(
-                modifier = Modifier.padding(start = 15.dp, top = 15.dp),
+                modifier = Modifier.padding(start = Dimen.mediumPadding, top = Dimen.largePadding),
                 text = "Cats",
                 style = MaterialTheme.typography.displaySmall
             )
 
             Spacer(
                 modifier = Modifier
-                    .height(10.dp)
+                    .height(Dimen.mediumHeight)
                     .fillMaxWidth()
             )
 
@@ -61,16 +61,16 @@ fun KittiesScreen(
 
             Spacer(
                 modifier = Modifier
-                    .height(10.dp)
+                    .height(Dimen.mediumHeight)
                     .fillMaxWidth()
             )
 
         }
 
-        KittiesGrid(
+        VerticalGrid(
             catBreeds = catBreeds,
             onItemClicked = onItemClicked,
-            onFavourite = onFavourite
+            onFavouriteClicked = onFavourite
         )
 
     }
@@ -128,6 +128,6 @@ fun KittiesScreen(
 @Preview
 @Composable
 private fun KittiesScreenPreview() {
-    KittiesScreen(listOf(), {}, {})
+    CatBreedsScreen(listOf(), {}, {})
 }
 
