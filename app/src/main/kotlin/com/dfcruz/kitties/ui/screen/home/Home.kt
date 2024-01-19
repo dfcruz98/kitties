@@ -42,7 +42,7 @@ fun NavGraphBuilder.homeGraph(onNavigateTodDetails: (String) -> Unit) {
         ) { padding ->
             NavHost(
                 navController = navController,
-                startDestination = com.dfcruz.cats.catBreedsNavigationRoute,
+                startDestination = catBreedsNavigationRoute,
                 modifier = Modifier.padding(padding)
             ) {
                 catBreedsScreen {

@@ -16,7 +16,7 @@ class DetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val breedId: String = checkNotNull(savedStateHandle[com.dfcruz.details.BREED_ID])
+    private val breedId: String = checkNotNull(savedStateHandle[BREED_ID])
 
     val catBreed = catBreedsRepository.getBreed(breedId)
         .stateIn(

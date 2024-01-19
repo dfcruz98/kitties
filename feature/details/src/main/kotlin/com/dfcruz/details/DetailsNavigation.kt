@@ -17,9 +17,9 @@ fun NavController.navigateToDetails(breedId: String) {
 
 fun NavGraphBuilder.detailsScreen(onBackPressed: () -> Unit) {
     composable(
-        route = "details_route/{${com.dfcruz.details.BREED_ID}}",
+        route = "details_route/{$BREED_ID}",
         arguments = listOf(
-            navArgument(com.dfcruz.details.BREED_ID) { type = NavType.StringType },
+            navArgument(BREED_ID) { type = NavType.StringType },
         ),
     ) {
         DetailsRoute(onBackPressed)

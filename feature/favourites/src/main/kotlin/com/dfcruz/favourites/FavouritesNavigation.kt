@@ -8,12 +8,12 @@ import androidx.navigation.compose.composable
 const val favouritesNavigationRoute = "favourites_route"
 
 fun NavController.navigateToFavourites(navOptions: NavOptions? = null) {
-    this.navigate(com.dfcruz.favourites.favouritesNavigationRoute, navOptions)
+    this.navigate(favouritesNavigationRoute, navOptions)
 }
 
 fun NavGraphBuilder.favouritesScreen(onItemClicked: (String) -> Unit) {
     composable(
-        route = com.dfcruz.favourites.favouritesNavigationRoute,
+        route = favouritesNavigationRoute,
     ) {
         FavouritesRoute(onItemClicked)
     }
