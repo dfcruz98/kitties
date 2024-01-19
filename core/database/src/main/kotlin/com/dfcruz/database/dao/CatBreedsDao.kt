@@ -1,6 +1,5 @@
 package com.dfcruz.database.dao
 
-import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -11,13 +10,10 @@ import com.dfcruz.database.entity.CatBreedEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface BreedsDao {
+interface CatBreedsDao {
 
     @Query("SELECT * FROM cat_breed WHERE id = :id")
     fun get(id: String): Flow<CatBreedEntity>
-
-    @Query("SELECT * FROM cat_breed")
-    fun pagingSource(): PagingSource<Int, CatBreedEntity>
 
     @Query("SELECT * FROM cat_breed WHERE favourite = 1")
     fun getFavourites(): Flow<List<CatBreedEntity>>

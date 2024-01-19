@@ -3,7 +3,7 @@ package com.dfcruz.database.di
 import android.content.Context
 import androidx.room.Room
 import com.dfcruz.database.KittiesDatabase
-import com.dfcruz.database.dao.BreedsDao
+import com.dfcruz.database.dao.CatBreedsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,7 +31,7 @@ internal object DatabaseModule {
     @Singleton
     fun provideBreedsDao(
         database: KittiesDatabase
-    ): BreedsDao {
+    ): CatBreedsDao {
         return database.catBreedsDao()
     }
 

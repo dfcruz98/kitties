@@ -17,9 +17,6 @@ room = "2.6.1"
 ksp = "1.9.10-1.0.13"
 org-jetbrains-kotlin-jvm = "1.9.0"
 composeStableMarker = "1.0.3"
-paging-runtime-ktx = "3.2.1"
-paging-compose = "3.2.1"
-paging-room = "2.6.1"
 material-icons-extended-android = "1.5.4"
 truth = "1.1.3"
 kotlinx-coroutines-test = "1.7.2"
@@ -51,9 +48,6 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 compose-stable-marker = { group = "com.github.skydoves", name = "compose-stable-marker", version.ref = "composeStableMarker" }
-paging-runtime-ktx = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging-runtime-ktx" }
-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging-compose" }
-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "paging-room" }
 material-icons-extended-android = { group = "androidx.compose.material", name = "material-icons-extended-android", version.ref = "material-icons-extended-android" }
 truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }

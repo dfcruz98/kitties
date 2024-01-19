@@ -53,6 +53,4 @@ dependencies {
     implementation(libs.room.ktx)
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
-
-    implementation(libs.room.paging)
 }

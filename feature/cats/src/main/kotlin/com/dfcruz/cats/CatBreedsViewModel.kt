@@ -27,13 +27,6 @@ class CatBreedsViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(),
             initialValue = "",
         )
-    /*
-        val catBreeds = search
-            .debounce(300)
-            .flatMapLatest {
-                catBreedsRepository.getBreedsPaging().cachedIn(viewModelScope)
-            }
-    */
 
     val catBreeds = search
         .debounce(300) // Give a time delay to allow the user to insert more digits
