@@ -1,10 +1,10 @@
-package com.dfcruz.kitties.navigation
+package com.dfcruz.kitties.ui.screen.home
 
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.dfcruz.kitties.R
 import com.dfcruz.kitties.ui.theme.KittiesIcons
 
-enum class TopLevelDestination(
+enum class HomeDestination(
     val icon: ImageVector,
     val iconTextId: Int,
 ) {
