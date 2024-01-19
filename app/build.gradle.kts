@@ -58,8 +58,14 @@ android {
 
 dependencies {
 
+    implementation(project(":feature:cats"))
+    implementation(project(":feature:details"))
+    implementation(project(":feature:favourites"))
+
     implementation(project(":core:data"))
     implementation(project(":core:model"))
+    implementation(project(":core:designsystem"))
+    implementation(project(":core:ui"))
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)

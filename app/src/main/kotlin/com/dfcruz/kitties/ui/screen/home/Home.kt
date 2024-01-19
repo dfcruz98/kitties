@@ -21,11 +21,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.dfcruz.kitties.ui.screen.catbreeds.catBreedsNavigationRoute
-import com.dfcruz.kitties.ui.screen.catbreeds.catBreedsScreen
-import com.dfcruz.kitties.ui.screen.catbreeds.catBreedsToKitties
-import com.dfcruz.kitties.ui.screen.favourites.favouritesScreen
-import com.dfcruz.kitties.ui.screen.favourites.navigateToFavourites
+import com.dfcruz.cats.catBreedsNavigationRoute
+import com.dfcruz.cats.catBreedsScreen
+import com.dfcruz.cats.catBreedsToKitties
+import com.dfcruz.favourites.favouritesScreen
+import com.dfcruz.favourites.navigateToFavourites
 
 const val homeNavigationRoute = "home_route"
 
@@ -42,7 +42,7 @@ fun NavGraphBuilder.homeGraph(onNavigateTodDetails: (String) -> Unit) {
         ) { padding ->
             NavHost(
                 navController = navController,
-                startDestination = catBreedsNavigationRoute,
+                startDestination = com.dfcruz.cats.catBreedsNavigationRoute,
                 modifier = Modifier.padding(padding)
             ) {
                 catBreedsScreen {

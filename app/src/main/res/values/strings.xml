@@ -1,11 +1,5 @@
 <resources>
     <string name="app_name">Kitties</string>
     <string name="favourites">Favourites</string>
-    <string name="origin">Origin</string>
-    <string name="temperament">Temperament</string>
-    <string name="about">About</string>
-    <string name="search">Search</string>
-    <string name="close">Close</string>
-    <string name="cat_image">Cat Image</string>
     <string name="cats">Cats</string>
 </resources>

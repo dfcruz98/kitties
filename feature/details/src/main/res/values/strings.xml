@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="origin">Origin</string>
+    <string name="temperament">Temperament</string>
+    <string name="about">About</string>
+</resources>

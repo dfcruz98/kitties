@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.dfcruz.kitties.ui.screen.details.detailsScreen
-import com.dfcruz.kitties.ui.screen.details.navigateToDetails
+import com.dfcruz.details.detailsScreen
+import com.dfcruz.details.navigateToDetails
 import com.dfcruz.kitties.ui.screen.home.homeGraph
 import com.dfcruz.kitties.ui.screen.home.homeNavigationRoute
 

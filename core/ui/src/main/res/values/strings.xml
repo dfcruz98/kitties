@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cat_image">Cat Image</string>
+    <string name="search">Search</string>
+    <string name="close">Close</string>
+</resources>
