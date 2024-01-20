@@ -1,6 +1,6 @@
 [versions]
 agp = "8.2.1"
-kotlin = "1.9.0"
+kotlin = "1.9.20"
 core-ktx = "1.12.0"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.1.5"
@@ -20,6 +20,10 @@ composeStableMarker = "1.0.3"
 material-icons-extended-android = "1.5.4"
 truth = "1.1.3"
 kotlinx-coroutines-test = "1.7.2"
+androidGradlePlugin = "8.1.4"
+
+# build-logic dependency
+androidx-compose-compiler = "1.5.4"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -52,6 +56,9 @@ material-icons-extended-android = { group = "androidx.compose.material", name = 
 truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
 
+# Dependencies of the included build-logic
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -60,3 +67,12 @@ com-google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", versio
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
+
+# Plugin defined in this project
+kitties-android-application-compose = { id = "kitties.android.application.compose", version = "unspecified" }
+kitties-android-library-compose = { id = "kitties.android.library.compose", version = "unspecified" }
+kitties-android-application = { id = "kitties.android.application", version = "unspecified" }
+kitties-android-library = { id = "kitties.android.library", version = "unspecified" }
+kitties-android-jvm-library = { id = "kitties.android.jvm.library", version = "unspecified" }
+kitties-android-feature = { id = "kitties.android.feature", version = "unspecified" }
+kitties-android-hilt = { id = "kitties.android.hilt", version = "unspecified" }

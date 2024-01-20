@@ -1,13 +1,8 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kitties.android.application)
+    alias(libs.plugins.kitties.android.application.compose)
+    alias(libs.plugins.kitties.android.hilt)
     alias(libs.plugins.com.google.dagger.hilt.android)
-    kotlin("kapt")
-}
-
-kapt {
-    correctErrorTypes = true
 }
 
 android {
@@ -36,19 +31,7 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -57,15 +40,13 @@ android {
 }
 
 dependencies {
+    implementation(projects.feature.cats)
+    implementation(projects.feature.details)
+    implementation(projects.feature.favourites)
 
-    implementation(project(":feature:cats"))
-    implementation(project(":feature:details"))
-    implementation(project(":feature:favourites"))
-
-    implementation(project(":core:data"))
-    implementation(project(":core:model"))
-    implementation(project(":core:designsystem"))
-    implementation(project(":core:ui"))
+    implementation(projects.core.model)
+    implementation(projects.core.designsystem)
+    implementation(projects.core.ui)
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
@@ -75,6 +56,7 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -82,13 +64,5 @@ dependencies {
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
-
-
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation.compose)
-    kapt(libs.hilt.android.compiler)
-
-    implementation(libs.coil.compose)
-
-    implementation(libs.material.icons.extended.android)
+    
 }
