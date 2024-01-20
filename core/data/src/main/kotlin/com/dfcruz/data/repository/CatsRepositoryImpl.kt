@@ -5,8 +5,7 @@ import com.dfcruz.data.mapping.toBreedsEntity
 import com.dfcruz.database.dao.CatBreedsDao
 import com.dfcruz.model.CatBreed
 import com.dfcruz.network.service.CatsService
-import com.dfcruz.network.util.RequestResult
-import com.dfcruz.network.util.tryMakingRequest
+import com.dfcruz.network.util.NetworkResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -26,17 +25,15 @@ class CatsRepositoryImpl @Inject constructor(
         return catBreedsDao.getAll()
             .onEach {
                 if (it.isEmpty()) {
-                    val response = tryMakingRequest {
-                        catsService.getImages(100, REQUEST_WITH_BREED, 0)
-                    }
+                    catsService.getImages(100, REQUEST_WITH_BREED, 0).also { response ->
+                        val breeds = when (response) {
+                            is NetworkResult.Error,
+                            is NetworkResult.Exception -> listOf()
 
-                    val breeds = when (response) {
-                        is RequestResult.Error,
-                        is RequestResult.Exception -> listOf()
-
-                        is RequestResult.Success -> response.value.toBreedsEntity()
+                            is NetworkResult.Success -> response.value.toBreedsEntity()
+                        }
+                        catBreedsDao.insertAll(breeds)
                     }
-                    catBreedsDao.insertAll(breeds)
                 }
             }.map { breeds ->
                 breeds.map { it.toBreed() }

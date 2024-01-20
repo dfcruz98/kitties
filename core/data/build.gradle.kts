@@ -16,7 +16,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
-    // TODO: Remove this dependency
-    implementation(libs.retrofit)
 }

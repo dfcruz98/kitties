@@ -2,6 +2,7 @@ package com.dfcruz.network.di
 
 import com.dfcruz.network.BuildConfig
 import com.dfcruz.network.service.CatsService
+import com.dfcruz.network.util.NetworkResultCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +31,7 @@ class NetworkModule {
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(NetworkResultCallAdapterFactory.create())
             .build()
     }
 
@@ -53,6 +55,7 @@ class NetworkModule {
             .writeTimeout(HTTP_REQUEST_CONNECTION_TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(logging)
             .addInterceptor(apiKeyInterceptor)
+
 
         return builder.build()
     }
