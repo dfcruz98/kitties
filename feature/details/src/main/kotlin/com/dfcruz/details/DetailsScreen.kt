@@ -36,19 +36,22 @@ fun DetailsRoute(
     viewModel: DetailsViewModel = hiltViewModel()
 ) {
     val catBreed = viewModel.catBreed.collectAsState().value
-    catBreed?.let {
-        DetailsScreen(it,
-            onBackPressed = onBackPressed,
-            onFavouriteToggle = {
-                viewModel.toggleFavourite()
-            }
-        )
-    }
+    val error = viewModel.error.collectAsState().value
+
+    DetailsScreen(
+        catBreed = catBreed,
+        error = error,
+        onBackPressed = onBackPressed,
+        onFavouriteToggle = {
+            viewModel.toggleFavourite()
+        }
+    )
 }
 
 @Composable
 fun DetailsScreen(
-    catBreed: CatBreed,
+    catBreed: CatBreed?,
+    error: String?,
     onBackPressed: () -> Unit,
     onFavouriteToggle: () -> Unit,
 ) {
@@ -56,27 +59,15 @@ fun DetailsScreen(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        Column(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState())
-                .fillMaxSize(),
-        ) {
-            AsyncImage(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.40f),
-                model = catBreed.image.url,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-            )
-            Spacer(
-                modifier = Modifier
-                    .height(Dimen.mediumHeight)
-                    .fillMaxWidth()
-            )
-            Details(
-                catBreed = catBreed
-            )
+        if (error != null) {
+            Text(text = error)
+        } else {
+
+            catBreed?.let {
+                Details(
+                    catBreed = catBreed
+                )
+            }
         }
 
         FilledIconButton(
@@ -91,94 +82,115 @@ fun DetailsScreen(
             )
         }
 
-        FilledIconButton(
-            modifier = Modifier
-                .padding(end = Dimen.largePadding, top = Dimen.mediumPadding)
-                .align(Alignment.TopEnd),
-            onClick = onFavouriteToggle
-        ) {
-            Icon(
-                imageVector = if (catBreed.favourite) KittiesIcons.Favourite else KittiesIcons.NotFavourite,
-                contentDescription = null
-            )
+        catBreed?.let {
+            FilledIconButton(
+                modifier = Modifier
+                    .padding(end = Dimen.largePadding, top = Dimen.mediumPadding)
+                    .align(Alignment.TopEnd),
+                onClick = onFavouriteToggle
+            ) {
+                Icon(
+                    imageVector = if (catBreed.favourite) KittiesIcons.Favourite else KittiesIcons.NotFavourite,
+                    contentDescription = null
+                )
+            }
         }
-
     }
 }
+
 
 @Composable
 fun Details(
     catBreed: CatBreed,
     modifier: Modifier = Modifier
 ) {
-    Surface(
-        modifier = modifier.fillMaxHeight(),
-        color = MaterialTheme.colorScheme.background,
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize(),
     ) {
-        Column(
-            modifier = Modifier.padding(horizontal = Dimen.horizontalPadding)
+        AsyncImage(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.40f),
+            model = catBreed.image.url,
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+        )
+        Spacer(
+            modifier = Modifier
+                .height(Dimen.mediumHeight)
+                .fillMaxWidth()
+        )
+
+        Surface(
+            modifier = modifier.fillMaxHeight(),
+            color = MaterialTheme.colorScheme.background,
         ) {
-            Text(
-                text = catBreed.name,
-                style = MaterialTheme.typography.displaySmall
-            )
+            Column(
+                modifier = Modifier.padding(horizontal = Dimen.horizontalPadding)
+            ) {
+                Text(
+                    text = catBreed.name,
+                    style = MaterialTheme.typography.displaySmall
+                )
 
-            Spacer(
-                modifier = Modifier
-                    .height(Dimen.mediumHeight)
-                    .fillMaxWidth()
-            )
+                Spacer(
+                    modifier = Modifier
+                        .height(Dimen.mediumHeight)
+                        .fillMaxWidth()
+                )
 
-            Text(
-                text = stringResource(R.string.origin),
-                style = MaterialTheme.typography.titleMedium
-            )
-            Text(
-                text = catBreed.origin,
-                style = MaterialTheme.typography.bodyMedium
-            )
+                Text(
+                    text = stringResource(R.string.origin),
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    text = catBreed.origin,
+                    style = MaterialTheme.typography.bodyMedium
+                )
 
-            Spacer(
-                modifier = Modifier
-                    .height(Dimen.mediumHeight)
-                    .fillMaxWidth()
-            )
+                Spacer(
+                    modifier = Modifier
+                        .height(Dimen.mediumHeight)
+                        .fillMaxWidth()
+                )
 
-            Text(
-                text = stringResource(R.string.temperament),
-                style = MaterialTheme.typography.titleMedium
-            )
+                Text(
+                    text = stringResource(R.string.temperament),
+                    style = MaterialTheme.typography.titleMedium
+                )
 
-            Text(
-                text = catBreed.temperament,
-                style = MaterialTheme.typography.bodyMedium
-            )
+                Text(
+                    text = catBreed.temperament,
+                    style = MaterialTheme.typography.bodyMedium
+                )
 
-            Spacer(
-                modifier = Modifier
-                    .height(Dimen.mediumHeight)
-                    .fillMaxWidth()
-            )
+                Spacer(
+                    modifier = Modifier
+                        .height(Dimen.mediumHeight)
+                        .fillMaxWidth()
+                )
 
-            Text(
-                text = stringResource(R.string.about),
-                style = MaterialTheme.typography.titleMedium
-            )
+                Text(
+                    text = stringResource(R.string.about),
+                    style = MaterialTheme.typography.titleMedium
+                )
 
-            Text(
-                text = catBreed.description,
-                style = MaterialTheme.typography.bodyMedium
-            )
+                Text(
+                    text = catBreed.description,
+                    style = MaterialTheme.typography.bodyMedium
+                )
 
-            Spacer(
-                modifier = Modifier
-                    .height(Dimen.mediumHeight)
-                    .fillMaxWidth()
-            )
+                Spacer(
+                    modifier = Modifier
+                        .height(Dimen.mediumHeight)
+                        .fillMaxWidth()
+                )
+            }
+
         }
-
     }
-
 }
 
 @Composable
@@ -206,5 +218,5 @@ fun DetailsScreenPreview() {
         )
     )
 
-    DetailsScreen(catBreed = catBreed, onBackPressed = {}, onFavouriteToggle = {})
+    DetailsScreen(catBreed = catBreed, error = null, onBackPressed = {}, onFavouriteToggle = {})
 }
