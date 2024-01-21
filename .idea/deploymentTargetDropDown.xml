@@ -2,9 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="CatBreedsScreenTest">
-        <State />
-      </entry>
       <entry key="DetailsScreenTest">
         <State />
       </entry>
@@ -28,9 +25,6 @@
         </State>
       </entry>
       <entry key="error_message_visible()">
-        <State />
-      </entry>
-      <entry key="favourites_back_quitsApp()">
         <State />
       </entry>
       <entry key="show_cat_grid()">

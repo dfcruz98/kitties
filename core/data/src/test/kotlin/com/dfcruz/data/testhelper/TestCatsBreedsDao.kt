@@ -1,11 +1,11 @@
-package com.dfcruz.data.fake
+package com.dfcruz.data.testhelper
 
 import com.dfcruz.database.dao.CatBreedsDao
 import com.dfcruz.database.entity.CatBreedEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class FakeCatsBreedsDao : CatBreedsDao {
+class TestCatsBreedsDao : CatBreedsDao {
 
     private var returnValue = mutableListOf<CatBreedEntity>()
     override fun get(id: String): Flow<CatBreedEntity> {

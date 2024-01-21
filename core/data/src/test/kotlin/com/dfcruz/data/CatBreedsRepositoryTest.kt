@@ -1,7 +1,5 @@
 package com.dfcruz.data
 
-import com.dfcruz.data.fake.FakeCatsBreedsDao
-import com.dfcruz.data.fake.FakeCatsService
 import com.dfcruz.data.repository.CatBreedsRepository
 import com.dfcruz.data.repository.CatsRepositoryImpl
 import com.dfcruz.database.entity.CatBreedEntity
@@ -11,6 +9,8 @@ import com.dfcruz.network.dto.CatBreedDto
 import com.dfcruz.network.dto.CatImageDto
 import com.dfcruz.network.dto.MassUnitsDto
 import com.dfcruz.network.util.NetworkResult
+import com.dfcruz.data.testhelper.TestCatsBreedsDao
+import com.dfcruz.data.testhelper.TestCatsService
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.toList
@@ -22,13 +22,13 @@ class CatBreedsRepositoryTest {
 
     private lateinit var SUT: CatBreedsRepository
 
-    private lateinit var catBreedsDao: FakeCatsBreedsDao
-    private lateinit var catsService: FakeCatsService
+    private lateinit var catBreedsDao: TestCatsBreedsDao
+    private lateinit var catsService: TestCatsService
 
     @Before
     fun setup() {
-        catBreedsDao = FakeCatsBreedsDao()
-        catsService = FakeCatsService()
+        catBreedsDao = TestCatsBreedsDao()
+        catsService = TestCatsService()
 
         SUT = CatsRepositoryImpl(
             catsService = catsService,

@@ -1,10 +1,10 @@
-package com.dfcruz.data.fake
+package com.dfcruz.data.testhelper
 
 import com.dfcruz.network.dto.CatImageDto
 import com.dfcruz.network.service.CatsService
 import com.dfcruz.network.util.NetworkResult
 
-class FakeCatsService : CatsService {
+class TestCatsService : CatsService {
 
     private var returnValue: NetworkResult<List<CatImageDto>> = NetworkResult.Success(listOf())
 
