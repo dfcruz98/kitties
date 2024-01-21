@@ -20,6 +20,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -49,7 +50,7 @@ fun DetailsRoute(
 }
 
 @Composable
-fun DetailsScreen(
+internal fun DetailsScreen(
     catBreed: CatBreed?,
     error: String?,
     onBackPressed: () -> Unit,
@@ -57,6 +58,7 @@ fun DetailsScreen(
 ) {
     Box(
         modifier = Modifier
+            .testTag("DetailScreen")
             .fillMaxSize()
     ) {
         if (error != null) {
@@ -73,7 +75,8 @@ fun DetailsScreen(
         FilledIconButton(
             modifier = Modifier
                 .padding(start = Dimen.largePadding, top = Dimen.mediumPadding)
-                .align(Alignment.TopStart),
+                .align(Alignment.TopStart)
+                .testTag("BackButton"),
             onClick = onBackPressed,
         ) {
             Icon(

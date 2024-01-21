@@ -40,6 +40,7 @@ fun NavGraphBuilder.homeGraph(onNavigateTodDetails: (String) -> Unit) {
                 KittiesBottomNavBar(navController, screens)
             }
         ) { padding ->
+
             NavHost(
                 navController = navController,
                 startDestination = catBreedsNavigationRoute,

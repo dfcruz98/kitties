@@ -7,6 +7,10 @@ plugins {
 
 android {
     namespace = "com.dfcruz.cats"
+
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
 }
 
 dependencies {

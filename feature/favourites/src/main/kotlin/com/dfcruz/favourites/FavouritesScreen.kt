@@ -1,6 +1,5 @@
 package com.dfcruz.favourites
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -41,7 +40,7 @@ fun FavouritesRoute(
 }
 
 @Composable
-fun FavouritesScreen(
+internal fun FavouritesScreen(
     catBreeds: List<CatBreed>,
     error: String?,
     loading: Boolean,
@@ -51,19 +50,24 @@ fun FavouritesScreen(
 
     Box {
         if (loading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .testTag("LoadingIndicator")
+            )
         }
 
         if (error != null) {
-            Toast.makeText(
-                LocalContext.current,
-                error,
-                Toast.LENGTH_LONG
-            ).show()
+            Text(
+                text = error,
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.align(Alignment.Center)
+            )
         } else {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
+                    .testTag("FavouritesGrid")
             ) {
 
                 Text(

@@ -7,11 +7,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dfcruz.designsystem.dimen.Dimen
 import com.dfcruz.model.CatBreed
@@ -43,7 +46,7 @@ fun CatBreedsRoute(
 }
 
 @Composable
-fun CatBreedsScreen(
+internal fun CatBreedsScreen(
     catBreeds: List<CatBreed>,
     error: String?,
     loading: Boolean,
@@ -53,21 +56,27 @@ fun CatBreedsScreen(
     onSearchQueryChanged: (String) -> Unit
 ) {
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .testTag("CatsScreen")
+            .fillMaxSize()
     ) {
         if (loading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .testTag("LoadingIndicator")
+                    .align(Alignment.Center)
+            )
         }
 
         if (error != null) {
-            Toast.makeText(
-                LocalContext.current,
-                error,
-                Toast.LENGTH_LONG
-            ).show()
+            Text(
+                text = error,
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.align(Alignment.Center)
+            )
         } else {
             Column(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().testTag("CatBreedsGrid")
             ) {
                 TopBar(search, onSearchQueryChanged)
                 VerticalGrid(

@@ -2,6 +2,15 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="CatBreedsScreenTest">
+        <State />
+      </entry>
+      <entry key="DetailsScreenTest">
+        <State />
+      </entry>
+      <entry key="FavouritesScreenTest">
+        <State />
+      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
@@ -17,6 +26,15 @@
           </targetSelectedWithDropDown>
           <timeTargetWasSelectedWithDropDown value="2024-01-20T14:23:22.237609Z" />
         </State>
+      </entry>
+      <entry key="error_message_visible()">
+        <State />
+      </entry>
+      <entry key="favourites_back_quitsApp()">
+        <State />
+      </entry>
+      <entry key="show_cat_grid()">
+        <State />
       </entry>
     </value>
   </component>
