@@ -39,7 +39,7 @@ class CatBreedsScreenTest {
     )
 
     @Test
-    fun circularProgressIndicator_whenScreenIsLoading_visible() {
+    fun loading_indicator_visible_while_loading_data() {
         composeTestRule.setContent {
             BoxWithConstraints {
                 CatBreedsScreen(

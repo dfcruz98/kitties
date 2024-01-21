@@ -1,6 +1,5 @@
-package com.dfcruz.details
+package com.dfcruz.cats
 
-import androidx.lifecycle.SavedStateHandle
 import com.dfcruz.model.CatBreed
 import com.dfcruz.model.Image
 import com.dfcruz.model.MassUnit
@@ -15,14 +14,10 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class DetailsViewModelTest {
+class CatBreedsViewModelTest {
 
     @get:Rule
     val dispatcherRule = MainDispatcherRule()
-
-    private lateinit var SUT: DetailsViewModel
-    private val savedStateHandle = SavedStateHandle()
-    private val catBreedsRepository = TestCatBreedsRepository()
 
     private val defaultCatBreed = CatBreed(
         id = "abys",
@@ -46,30 +41,59 @@ class DetailsViewModelTest {
         )
     )
 
+    private lateinit var SUT: CatBreedsViewModel
+    private val catBreedsRepository = TestCatBreedsRepository()
+
     @Before
     fun setup() {
-        savedStateHandle[BREED_ID] = "abys"
-        SUT = DetailsViewModel(
+        SUT = CatBreedsViewModel(
             catBreedsRepository = catBreedsRepository,
-            savedStateHandle = savedStateHandle,
         )
     }
 
     @Test
     fun check_initial_state() = runTest {
-        assertThat(SUT.catBreed.value).isNull()
+        assertThat(SUT.catBreeds.value.size).isEqualTo(0)
         assertThat(SUT.error.value).isNull()
+        assertThat(SUT.loading.value).isEqualTo(false)
+        assertThat(SUT.search.value).isEqualTo("")
     }
 
     @Test
-    fun fetch_details() = runTest {
-        val collectJob = launch(UnconfinedTestDispatcher()) { SUT.catBreed.collect() }
+    fun get_cats_without_filter() = runTest {
+        val collectJob = launch(UnconfinedTestDispatcher()) { SUT.catBreeds.collect() }
+
+        SUT.setSearch("")
 
         catBreedsRepository.clear()
-        catBreedsRepository.setValue(listOf(defaultCatBreed))
+        catBreedsRepository.setValue(listOf(defaultCatBreed.copy(), defaultCatBreed.copy()))
 
-        assertThat(SUT.catBreed.value).isEqualTo(defaultCatBreed)
+        assertThat(SUT.catBreeds.value.size).isEqualTo(2)
+        assertThat(SUT.loading.value).isEqualTo(false)
+        assertThat(SUT.search.value).isEqualTo("")
 
         collectJob.cancel()
     }
+
+    @Test
+    fun filter_cats() = runTest {
+        val collectJob = launch(UnconfinedTestDispatcher()) { SUT.catBreeds.collect() }
+
+        SUT.setSearch("american")
+
+        catBreedsRepository.clear()
+        catBreedsRepository.setValue(
+            listOf(
+                defaultCatBreed,
+                defaultCatBreed.copy(name = "American short hair")
+            )
+        )
+
+        assertThat(SUT.catBreeds.value.size).isEqualTo(1)
+        assertThat(SUT.loading.value).isEqualTo(false)
+        assertThat(SUT.search.value).isEqualTo("american")
+
+        collectJob.cancel()
+    }
+
 }

@@ -16,7 +16,7 @@ class FavouritesScreenTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val catBreedTestData = CatBreed(
+    private val favouritesTestData = CatBreed(
         id = "abys",
         name = "Abyssinian",
         temperament = "Active, Energetic, Independent, Intelligent, Gentle",
@@ -39,7 +39,7 @@ class FavouritesScreenTest {
     )
 
     @Test
-    fun circularProgressIndicator_whenScreenIsLoading_visible() {
+    fun loading_indicator_visible_while_loading_data() {
         composeTestRule.setContent {
             BoxWithConstraints {
                 FavouritesScreen(
@@ -65,7 +65,7 @@ class FavouritesScreenTest {
                 FavouritesScreen(
                     catBreeds = listOf(),
                     error = errorMessage,
-                    loading = false,
+                    loading = true,
                     onItemClicked = {},
                     onFavouriteClicked = {}
                 )
@@ -82,9 +82,9 @@ class FavouritesScreenTest {
         composeTestRule.setContent {
             BoxWithConstraints {
                 FavouritesScreen(
-                    catBreeds = listOf(catBreedTestData),
+                    catBreeds = listOf(favouritesTestData),
                     error = null,
-                    loading = false,
+                    loading = true,
                     onItemClicked = {},
                     onFavouriteClicked = {}
                 )

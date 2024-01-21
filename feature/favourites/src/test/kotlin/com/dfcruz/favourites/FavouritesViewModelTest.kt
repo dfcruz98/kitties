@@ -1,6 +1,5 @@
-package com.dfcruz.details
+package com.dfcruz.favourites
 
-import androidx.lifecycle.SavedStateHandle
 import com.dfcruz.model.CatBreed
 import com.dfcruz.model.Image
 import com.dfcruz.model.MassUnit
@@ -15,13 +14,12 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class DetailsViewModelTest {
+class FavouritesViewModelTest {
 
     @get:Rule
     val dispatcherRule = MainDispatcherRule()
 
-    private lateinit var SUT: DetailsViewModel
-    private val savedStateHandle = SavedStateHandle()
+    private lateinit var SUT: FavouritesViewModel
     private val catBreedsRepository = TestCatBreedsRepository()
 
     private val defaultCatBreed = CatBreed(
@@ -48,28 +46,33 @@ class DetailsViewModelTest {
 
     @Before
     fun setup() {
-        savedStateHandle[BREED_ID] = "abys"
-        SUT = DetailsViewModel(
+        SUT = FavouritesViewModel(
             catBreedsRepository = catBreedsRepository,
-            savedStateHandle = savedStateHandle,
         )
     }
 
     @Test
     fun check_initial_state() = runTest {
-        assertThat(SUT.catBreed.value).isNull()
+        assertThat(SUT.breeds.value.size).isEqualTo(0)
         assertThat(SUT.error.value).isNull()
     }
 
     @Test
-    fun fetch_details() = runTest {
-        val collectJob = launch(UnconfinedTestDispatcher()) { SUT.catBreed.collect() }
+    fun get_favourites() = runTest {
+        val collectJob = launch(UnconfinedTestDispatcher()) { SUT.breeds.collect() }
 
         catBreedsRepository.clear()
-        catBreedsRepository.setValue(listOf(defaultCatBreed))
+        catBreedsRepository.setValue(
+            listOf(
+                defaultCatBreed.copy(favourite = false),
+                defaultCatBreed.copy(favourite = true)
+            )
+        )
 
-        assertThat(SUT.catBreed.value).isEqualTo(defaultCatBreed)
+        assertThat(SUT.breeds.value.size).isEqualTo(1)
+        assertThat(SUT.breeds.value.first().favourite).isEqualTo(true)
 
         collectJob.cancel()
     }
+
 }
