@@ -2,7 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="DetailsScreenTest">
+      <entry key="CatBreedsScreenTest">
         <State />
       </entry>
       <entry key="FavouritesScreenTest">
@@ -23,12 +23,6 @@
           </targetSelectedWithDropDown>
           <timeTargetWasSelectedWithDropDown value="2024-01-20T14:23:22.237609Z" />
         </State>
-      </entry>
-      <entry key="error_message_visible()">
-        <State />
-      </entry>
-      <entry key="show_cat_grid()">
-        <State />
       </entry>
     </value>
   </component>

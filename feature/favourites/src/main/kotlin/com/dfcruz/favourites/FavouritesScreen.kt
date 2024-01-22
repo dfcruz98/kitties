@@ -1,9 +1,7 @@
 package com.dfcruz.favourites
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -12,10 +10,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.dfcruz.designsystem.dimen.Dimen
 import com.dfcruz.model.CatBreed
 import com.dfcruz.ui.VerticalGrid
 
@@ -64,28 +60,14 @@ internal fun FavouritesScreen(
                 modifier = Modifier.align(Alignment.Center)
             )
         } else {
-            Column(
+            VerticalGrid(
+                catBreeds = catBreeds,
                 modifier = Modifier
                     .fillMaxSize()
-                    .testTag("FavouritesGrid")
-            ) {
-
-                Text(
-                    modifier = Modifier
-                        .padding(
-                            start = Dimen.largePadding,
-                            top = Dimen.largePadding
-                        ),
-                    text = stringResource(R.string.favourites),
-                    style = MaterialTheme.typography.displaySmall
-                )
-
-                VerticalGrid(
-                    catBreeds = catBreeds,
-                    onItemClicked = onItemClicked,
-                    onFavouriteClicked = onFavouriteClicked
-                )
-            }
+                    .testTag("FavouritesGrid"),
+                onItemClicked = onItemClicked,
+                onFavouriteClicked = onFavouriteClicked
+            )
         }
     }
 }

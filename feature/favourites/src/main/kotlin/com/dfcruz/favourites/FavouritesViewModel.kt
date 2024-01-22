@@ -19,7 +19,7 @@ class FavouritesViewModel @Inject constructor(
     private val catBreedsRepository: CatBreedsRepository,
 ) : ViewModel() {
 
-    private val _loading = MutableStateFlow(false)
+    private val _loading = MutableStateFlow(true)
     val loading = _loading.asStateFlow()
 
     private val _error = MutableStateFlow<String?>(null)
@@ -27,16 +27,14 @@ class FavouritesViewModel @Inject constructor(
 
     val breeds = catBreedsRepository.getFavouriteBreeds()
         .onStart {
-            // TODO: Fix loading when returning from the details
-            _loading.value = true
             _error.value = null
         }
         .catch {
-            _loading.value = true
+            _loading.value = false
             _error.value = "Error loading cat details"
         }
         .onEach {
-            if (it.isEmpty()) _loading.value = false
+            _loading.value = false
         }
         .stateIn(
             scope = viewModelScope,
