@@ -9,7 +9,7 @@ import com.dfcruz.database.entity.CatBreedEntity
 import com.dfcruz.database.entity.ImageEntity
 import com.dfcruz.database.entity.MassUnitEntity
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
@@ -65,7 +65,7 @@ class CatBreedsDaoTest {
             )
         )
         catBreedsDao.insertAll(entities)
-        val favourites = catBreedsDao.getFavourites().toList().flatten()
+        val favourites = catBreedsDao.getFavourites().first()
         assertThat(favourites).hasSize(1)
     }
 }
