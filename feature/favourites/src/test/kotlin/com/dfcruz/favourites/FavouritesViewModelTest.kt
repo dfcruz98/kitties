@@ -53,24 +53,41 @@ class FavouritesViewModelTest {
 
     @Test
     fun check_initial_state() = runTest {
-        assertThat(SUT.breeds.value.size).isEqualTo(0)
+        assertThat(SUT.favouritesData.value).isNull()
+        assertThat(SUT.loading.value).isEqualTo(true)
         assertThat(SUT.error.value).isNull()
     }
 
     @Test
     fun get_favourites() = runTest {
-        val collectJob = launch(UnconfinedTestDispatcher()) { SUT.breeds.collect() }
+        val collectJob = launch(UnconfinedTestDispatcher()) { SUT.favouritesData.collect() }
 
-        catBreedsRepository.clear()
-        catBreedsRepository.setValue(
+        catBreedsRepository.emit(
             listOf(
                 defaultCatBreed.copy(favourite = false),
+                defaultCatBreed.copy(favourite = true),
                 defaultCatBreed.copy(favourite = true)
             )
         )
 
-        assertThat(SUT.breeds.value.size).isEqualTo(1)
-        assertThat(SUT.breeds.value.first().favourite).isEqualTo(true)
+        assertThat(SUT.favouritesData.value?.favourites?.size).isEqualTo(2)
+        assertThat(SUT.favouritesData.value?.favourites?.first()?.favourite).isEqualTo(true)
+
+        collectJob.cancel()
+    }
+
+    @Test
+    fun calculate_average() = runTest {
+        val collectJob = launch(UnconfinedTestDispatcher()) { SUT.favouritesData.collect() }
+
+        catBreedsRepository.emit(
+            listOf(
+                defaultCatBreed.copy(favourite = true, lifeSpan = "15 - 20"),
+                defaultCatBreed.copy(favourite = true, lifeSpan = "17 - 20")
+            )
+        )
+
+        assertThat(SUT.favouritesData.value?.averageLifespan).isEqualTo(16)
 
         collectJob.cancel()
     }

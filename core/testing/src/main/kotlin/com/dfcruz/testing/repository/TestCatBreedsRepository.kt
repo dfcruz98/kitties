@@ -26,11 +26,7 @@ class TestCatBreedsRepository : CatBreedsRepository {
 
     }
 
-    fun setValue(catBreeds: List<CatBreed>) {
+    fun emit(catBreeds: List<CatBreed>) {
         _catBreeds.tryEmit(catBreeds)
-    }
-
-    fun clear() {
-        _catBreeds.tryEmit(listOf())
     }
 }

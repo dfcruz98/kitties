@@ -43,7 +43,7 @@ class FavouritesScreenTest {
         composeTestRule.setContent {
             BoxWithConstraints {
                 FavouritesScreen(
-                    catBreeds = listOf(),
+                    catBreeds = null,
                     error = null,
                     loading = true,
                     onItemClicked = {},
@@ -63,7 +63,7 @@ class FavouritesScreenTest {
         composeTestRule.setContent {
             BoxWithConstraints {
                 FavouritesScreen(
-                    catBreeds = listOf(),
+                    catBreeds = null,
                     error = errorMessage,
                     loading = true,
                     onItemClicked = {},
@@ -82,7 +82,10 @@ class FavouritesScreenTest {
         composeTestRule.setContent {
             BoxWithConstraints {
                 FavouritesScreen(
-                    catBreeds = listOf(favouritesTestData),
+                    catBreeds = FavouritesData(
+                        favourites = listOf(favouritesTestData),
+                        averageLifespan = 0
+                    ),
                     error = null,
                     loading = true,
                     onItemClicked = {},

@@ -1,7 +1,12 @@
 package com.dfcruz.favourites
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -12,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.dfcruz.model.CatBreed
+import com.dfcruz.designsystem.dimen.Dimen
 import com.dfcruz.ui.VerticalGrid
 
 @Composable
@@ -20,12 +25,12 @@ fun FavouritesRoute(
     onItemClicked: (String) -> Unit,
     viewModel: FavouritesViewModel = hiltViewModel()
 ) {
-    val catBreeds = viewModel.breeds.collectAsState().value
+    val catBreeds = viewModel.favouritesData.collectAsState()
     val error = viewModel.error.collectAsState()
     val loading = viewModel.loading.collectAsState()
 
     FavouritesScreen(
-        catBreeds = catBreeds,
+        catBreeds = catBreeds.value,
         error = error.value,
         loading = loading.value,
         onItemClicked = onItemClicked,
@@ -37,7 +42,7 @@ fun FavouritesRoute(
 
 @Composable
 internal fun FavouritesScreen(
-    catBreeds: List<CatBreed>,
+    catBreeds: FavouritesData?,
     error: String?,
     loading: Boolean,
     onItemClicked: (String) -> Unit,
@@ -60,14 +65,31 @@ internal fun FavouritesScreen(
                 modifier = Modifier.align(Alignment.Center)
             )
         } else {
-            VerticalGrid(
-                catBreeds = catBreeds,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .testTag("FavouritesGrid"),
-                onItemClicked = onItemClicked,
-                onFavouriteClicked = onFavouriteClicked
-            )
+            catBreeds?.let {
+                Column {
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(Dimen.mediumPadding),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = "Average Lifespan",
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Text(
+                            text = "${catBreeds.averageLifespan}",
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                    }
+                    VerticalGrid(
+                        catBreeds = catBreeds.favourites,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .testTag("FavouritesGrid"),
+                        onItemClicked = onItemClicked,
+                        onFavouriteClicked = onFavouriteClicked
+                    )
+                }
+            }
         }
     }
 }
@@ -77,7 +99,7 @@ internal fun FavouritesScreen(
 @Composable
 private fun FavouritesScreenPreview() {
     FavouritesScreen(
-        catBreeds = listOf(),
+        catBreeds = FavouritesData(listOf(), 0),
         onItemClicked = {},
         loading = false,
         error = "",
