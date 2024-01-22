@@ -65,8 +65,7 @@ class DetailsViewModelTest {
     fun fetch_details() = runTest {
         val collectJob = launch(UnconfinedTestDispatcher()) { SUT.catBreed.collect() }
 
-        catBreedsRepository.clear()
-        catBreedsRepository.setValue(listOf(defaultCatBreed))
+        catBreedsRepository.emit(listOf(defaultCatBreed))
 
         assertThat(SUT.catBreed.value).isEqualTo(defaultCatBreed)
 

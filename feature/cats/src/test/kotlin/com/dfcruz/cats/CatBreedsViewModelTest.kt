@@ -6,6 +6,7 @@ import com.dfcruz.model.MassUnit
 import com.dfcruz.testing.repository.TestCatBreedsRepository
 import com.dfcruz.testing.rule.MainDispatcherRule
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -55,7 +56,7 @@ class CatBreedsViewModelTest {
     fun check_initial_state() = runTest {
         assertThat(SUT.catBreeds.value.size).isEqualTo(0)
         assertThat(SUT.error.value).isNull()
-        assertThat(SUT.loading.value).isEqualTo(false)
+        assertThat(SUT.loading.value).isEqualTo(true)
         assertThat(SUT.search.value).isEqualTo("")
     }
 
@@ -65,8 +66,14 @@ class CatBreedsViewModelTest {
 
         SUT.setSearch("")
 
-        catBreedsRepository.clear()
-        catBreedsRepository.setValue(listOf(defaultCatBreed.copy(), defaultCatBreed.copy()))
+        catBreedsRepository.emit(
+            listOf(
+                defaultCatBreed,
+                defaultCatBreed
+            )
+        )
+
+        delay(SEARCH_DEBOUNCE_TIME)
 
         assertThat(SUT.catBreeds.value.size).isEqualTo(2)
         assertThat(SUT.loading.value).isEqualTo(false)
@@ -81,13 +88,14 @@ class CatBreedsViewModelTest {
 
         SUT.setSearch("american")
 
-        catBreedsRepository.clear()
-        catBreedsRepository.setValue(
+        catBreedsRepository.emit(
             listOf(
                 defaultCatBreed,
                 defaultCatBreed.copy(name = "American short hair")
             )
         )
+
+        delay(SEARCH_DEBOUNCE_TIME)
 
         assertThat(SUT.catBreeds.value.size).isEqualTo(1)
         assertThat(SUT.loading.value).isEqualTo(false)

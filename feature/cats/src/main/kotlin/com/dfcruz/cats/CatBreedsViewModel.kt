@@ -17,6 +17,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+const val SEARCH_DEBOUNCE_TIME = 300L
+
 @OptIn(FlowPreview::class)
 @HiltViewModel
 class CatBreedsViewModel @Inject constructor(
@@ -38,7 +40,7 @@ class CatBreedsViewModel @Inject constructor(
         )
 
     val catBreeds = search
-        .debounce(300) // Give a time delay to allow the user to insert more digits
+        .debounce(SEARCH_DEBOUNCE_TIME) // Give a time delay to allow the user to insert more digits
         .combine(catBreedsRepository.getBreeds()) { filter, catBreeds ->
             if (filter.isBlank()) return@combine catBreeds
             catBreeds.filter { it.name.uppercase().contains(filter.trim().uppercase()) }
